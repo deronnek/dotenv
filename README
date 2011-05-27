@@ -1,0 +1,6 @@
+Meta-repository containing my development environment.
+
+Setup commands:
+ln -s dotbash/.bashrc .bashrc
+ln -s dotbash/.bash_aliases .bash_aliases
+ln -s dotbash/.screenrc .screenrc
