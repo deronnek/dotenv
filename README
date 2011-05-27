@@ -1,12 +1,21 @@
 Meta-repository containing my development environment.
 
-Setup commands:
+# Setup commands:
 mv .bashrc .bashrc_orig
 mv .bash_aliases .bash_aliases_orig
 mv .screenrc .screenrc_orig
 mv .vimrc .vimrc_orig
+git clone http://github.com/deronnek/dotenv.git
 #
 ln -s dotbash/.bashrc .bashrc
 ln -s dotbash/.bash_aliases .bash_aliases
 ln -s dotbash/.screenrc .screenrc
 ln -s .vim/vimrc .vimrc
+git submodule init
+git submodule update
+cd .vim
+git submodule init
+git submodule update
+cd ~/
+
+# Note: submodule updates may not work if you haven't committed/pushed the latest versions.
