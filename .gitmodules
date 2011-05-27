@@ -1,0 +1,12 @@
+[submodule "dotbash"]
+	path = dotbash
+	url = http://github.com/deronnek/dotbash
+[submodule "dotvim"]
+	path = dotvim
+	url = http://github.com/deronnek/dotvim
+[submodule "gitbin"]
+	path = gitbin
+	url = http://github.com/deronnek/gitbin
+[submodule ".vim"]
+	path = .vim
+	url = http://github.com/deronnek/dotvim
