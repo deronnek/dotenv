@@ -5,6 +5,7 @@ mv .bashrc .bashrc_orig
 mv .bash_aliases .bash_aliases_orig
 mv .screenrc .screenrc_orig
 mv .vimrc .vimrc_orig
+mv .vim .vim_orig
 git clone http://github.com/deronnek/dotenv.git
 #
 ln -s dotbash/.bashrc .bashrc
