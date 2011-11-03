@@ -14,6 +14,7 @@ ln -s dotenv/dotbash/.bash_aliases .bash_aliases
 ln -s dotenv/dotbash/.screenrc .screenrc
 ln -s dotenv/.vim/vimrc .vimrc
 ln -s dotenv/.vim .vim
+cd dotenv
 git submodule init
 git submodule update
 cd .vim
