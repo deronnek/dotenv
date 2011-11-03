@@ -1,7 +1,7 @@
 Meta-repository containing my development environment.
 
 # Setup commands:
-git clone http://github.com/deronnek/dotenv.git
+git clone git://github.com/deronnek/dotenv.git
 #
 mv .bashrc .bashrc_orig
 mv .bash_aliases .bash_aliases_orig
