@@ -9,9 +9,9 @@ mv .screenrc .screenrc_orig
 mv .vimrc .vimrc_orig
 mv .vim .vim_orig
 #
-ln -s dotenv/dotbash/.bashrc .bashrc
-ln -s dotenv/dotbash/.bash_aliases .bash_aliases
-ln -s dotenv/dotbash/.screenrc .screenrc
+ln -s dotenv/dotbash/bashrc .bashrc
+ln -s dotenv/dotbash/bash_aliases .bash_aliases
+ln -s dotenv/dotbash/screenrc .screenrc
 ln -s dotenv/.vim/vimrc .vimrc
 ln -s dotenv/.vim .vim
 cd dotenv
