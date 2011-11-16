@@ -20,6 +20,9 @@ git submodule update
 cd .vim
 git submodule init
 git submodule update
+cd dotbash
+git submodule init
+git submodule update
 cd ~/
 
 # Note: submodule updates may not work if you haven't committed/pushed the latest versions.
