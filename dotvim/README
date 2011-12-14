@@ -1,0 +1,23 @@
+Mostly based on http://vimcasts.org/episodes/synchronizing-plugins-with-git-submodules-and-pathogen/
+Installation:
+
+# get the config from github 
+cd ~
+git clone http://github.com/deronnek/dotvim.git ~/.vim
+ln -s ~/.vim/vimrc ~/.vimrc
+ln -s ~/.vim/gvimrc ~/.gvimrc
+
+# update all the plugins that are installed as submodules
+cd ~/.vim
+git submodule update --init 
+
+# updating a plugin
+cd ~/.vim/bundle/fugitive
+git pull
+
+# installing a vim plugin - using fugitive as an example
+cd ~/.vim
+mkdir ~/.vim/bundle # if it doesn't exist already
+git submodule add http://github.com/tpope/vim-fugitive.git bundle/fugitive
+git add .
+git commit -m "Install Fugitive.vim bundle as a submodule."

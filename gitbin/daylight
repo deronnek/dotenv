@@ -1,0 +1,117 @@
+#!/usr/bin/perl -w
+# script to show current sunrise and sunset for an arbitrary location in the states
+# requires lynx
+# written by david seelig, 2005
+
+use strict;
+
+my $date = `date +'%m/%d/%Y'`;
+my $city = 'minneapolis';
+my $state = 'mn';
+my %monHash;
+
+$monHash{Jan} = 1;
+$monHash{Feb} = 2;
+$monHash{Mar} = 3;
+$monHash{Apr} = 4;
+$monHash{May} = 5;
+$monHash{Jun} = 6;
+$monHash{Jul} = 7;
+$monHash{Aug} = 8;
+$monHash{Sep} = 9;
+$monHash{Oct} = 10;
+$monHash{Nov} = 11;
+$monHash{Dec} = 12;
+
+if ( ($ARGV[0]) and ($ARGV[0] eq '-h') ) { die "Usage: $0 [city] [state] [mm/dd/yyyy]\nDefaults: $city, $state, $date\n"; }
+
+foreach my $arg (@ARGV) {
+	if($arg =~ /\//) {
+		$date = $arg
+	}
+	elsif(length($arg) == 2) {
+		$state = $arg;
+	}
+	else {
+		$city = $arg;
+	}
+}
+
+chomp($date);
+print "$city, $state $date\n";
+my ($month,$day,$year) = split("/", $date);
+
+my $URL    = "http://aa.usno.navy.mil/cgi-bin/aa_rstablew.pl?FFX=1&year=" . $year . "&type=0&st=" . $state . "&place=" . $city . "&ZZZ=END";
+
+#################################################################################################
+# daylight savings time compensation section added by kevin deronne
+#################################################################################################
+#$gmtstring = `date --utc`;
+#$dststring = `date`;
+my $DSTURL = "http://aa.usno.navy.mil/faq/docs/daylight_time.html";
+my $dstline = `lynx -source '$DSTURL' | grep \"In $year\"`;
+my ($dstbeginmon, $dstbeginday, $dstendmon, $dstendday) = ($dstline =~ /begins on (.*) (.*) and ends on (.*) (.*)\./);
+$dstbeginmon = substr($dstbeginmon,0,3);
+$dstendmon   = substr($dstendmon,0,3);
+$dstbeginmon = $monHash{$dstbeginmon};
+$dstendmon   = $monHash{$dstendmon};
+
+my $dst = 0;
+# If we haven't entered DST yet, or
+if($month < $dstbeginmon) {  
+	#print "No DST .. month < begin\n";
+	$dst = 0;
+}
+elsif($month == $dstbeginmon and $day < $dstbeginday) {
+	#print "No DST .. in begin month, before begin day\n";
+	$dst = 0;
+}
+# here we know we're past dst's begin day 
+elsif($month >= $dstbeginmon and $month < $dstendmon) {
+	#print "DST equal or past begin month, before end month\n";
+	$dst = 1;
+}
+elsif($month == $dstendmon and $day < $dstendday) {
+	#print "DST in end month, before end day\n";
+	$dst = 1;
+}
+else {
+	#print "No DST past end month, before begin month\n";
+	$dst = 0;
+}
+
+my $line;
+open(TmpFile, " lynx -source '$URL' |");
+
+while (<TmpFile>) {
+
+    $line = $_;  
+    if ($line =~ m/^$day/) {
+        $line =~ s/^.{4}//;
+        my $month_start_char = ($month-1) * 11;
+        $line =~ s/^.{$month_start_char}(.{2})(.{2})\s{1}(.{2})(.{2}).*/$1 $2 $3 $4/;
+        print 'rise: ',$1+$dst,':',$2,' ','set: ',$3+$dst,':',$4,"\n";
+
+        my $length = &min_to_hr(&hr_to_min($3,$4)-&hr_to_min($1,$2));
+        print "daylight hours: ", $length, "\n";
+    }
+
+}
+close(TmpFile);
+
+sub min_to_hr() {
+    #return ($min/60, $min%60);
+    use integer;
+    my   $min = $_[0];
+    my   $time = $min/60 . ":" . sprintf("%02d",$min%60);
+    no integer;
+    $time;
+}
+
+sub hr_to_min() {
+    #return ($hr*60+$min)
+    my $hr = $_[0];
+    my $min = $_[1];
+    my $time = $hr*60 + $min;
+    $time;
+}

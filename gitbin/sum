@@ -1,0 +1,17 @@
+#!/usr/bin/gawk -f
+# Use -vcol=column_number to sum the values in a given column
+BEGIN {
+  sum   = 0;
+  count = 0;
+}
+
+{
+  val[NR] = $col;
+  count++;
+}
+END {
+  for(i in val) {
+    sum += val[i];
+  }
+  print "sum: "sum;
+}

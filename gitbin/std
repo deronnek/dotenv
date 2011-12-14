@@ -1,0 +1,24 @@
+#!/usr/bin/gawk -f
+# Use -vcol=column_number to get the standard deviation of the values in a column
+BEGIN {
+  sum   = 0;
+  count = 0;
+}
+
+{
+  val[NR] = $col;
+  count++;
+}
+END {
+  for(i in val) {
+    sum += val[i];
+  }
+  avg = sum / count;
+
+  for(i in val) {
+    sqsum += (val[i]-avg)*(val[i]-avg);
+  }
+  std = sqrt(sqsum/(count-1));
+  #printf("%1.10f",std);
+  print "n: "count" mean: "avg" +/- "std
+}
