@@ -1,5 +1,4 @@
-Meta-repository containing my development environment.
-
+Repository containing my development environment.
 # Setup commands:
 git clone git://github.com/deronnek/dotenv.git
 #
@@ -12,17 +11,5 @@ mv .vim .vim_orig
 ln -s dotenv/dotbash/bashrc .bashrc
 ln -s dotenv/dotbash/bash_aliases .bash_aliases
 ln -s dotenv/dotbash/screenrc .screenrc
-ln -s dotenv/.vim/vimrc .vimrc
-ln -s dotenv/.vim .vim
-cd dotenv
-git submodule init
-git submodule update
-cd .vim
-git submodule init
-git submodule update
-cd dotbash
-git submodule init
-git submodule update
-cd ~/
-
-# Note: submodule updates may not work if you haven't committed/pushed the latest versions.
+ln -s dotenv/dotvim/vimrc .vimrc
+ln -s dotenv/dotvim .vim
