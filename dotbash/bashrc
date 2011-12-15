@@ -1,4 +1,4 @@
-source /home/deronne/.bash_aliases
+source $HOME/.bash_aliases
 source /etc/bash_completion
 export PATH="$HOME/bin:$HOME/local/bin:$HOME/gitbin:"$PATH
 export LD_LIBRARY_PATH="/usr/lib:$HOME/local/lib"
