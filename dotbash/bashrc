@@ -1,13 +1,7 @@
 source /home/deronne/.bash_aliases
 source /etc/bash_completion
-
-export EDISC_PERL_DEV="/srv/ediscovery/trunk/common"
-export EDISC_PERL_STAGE="/srv/ediscovery/trunk/common"
-export EDISC_PERL_PROD="/srv/ediscovery/trunk/common";
-export EDISC_FONTS="/srv/ediscovery/current/convert/fonts";
-
-export PATH="/home/deronne/bin:/home/deronne/local/bin:/home/deronne/gitbin:"$PATH
-export LD_LIBRARY_PATH="/usr/lib:/home/deronne/local/lib"
+export PATH="$HOME/bin:$HOME/local/bin:$HOME/gitbin:"$PATH
+export LD_LIBRARY_PATH="/usr/lib:$HOME/local/lib"
 export PATH="/usr/local/moab/bin:$PATH"
 
 function pss {
