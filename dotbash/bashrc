@@ -48,3 +48,21 @@ ulimit -s unlimited
 function scatter {
   echo plot \'$1\' | gnuplot -persist -
 }
+
+function scatterp {
+  echo plot \'$1\' u 1:2:3 with points palette | gnuplot -persist -
+}
+function scatterp3 {
+  echo splot \'$1\' u 1:2:3:4 with points palette | gnuplot -persist -
+}
+
+function _screen_complete {
+  local curw
+  COMPREPLY=()
+  curw=${COMP_WORDS[COMP_CWORD]}
+  COMPREPLY=($(ls /var/run/screen/S-`logname` | grep "$curw" ))
+  return 0
+}
+complete -F _screen_complete screen
+
+
