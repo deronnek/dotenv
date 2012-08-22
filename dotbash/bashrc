@@ -65,4 +65,6 @@ function _screen_complete {
 }
 complete -F _screen_complete screen
 
-
+# Have cpan always use the default response to prompts
+# e.g. always install dependencies
+export PERL_MM_USE_DEFAULT=1
