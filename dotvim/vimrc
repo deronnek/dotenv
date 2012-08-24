@@ -31,9 +31,6 @@ if &t_Co > 8        " if terminal supports colors
    colors cdefault
 endif
 
-"This slows down vim but keep syntax highlighting from being confused by folds
-:syn sync fromstart
-
 ":filetype on
 ":autocmd filetype *   set nocindent
 ":autocmd filetype c,h set formatoptions=cq cindent foldmethod=syntax " from GK
