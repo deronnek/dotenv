@@ -2,7 +2,7 @@
 " deronnek vimrc - 2007.01.22 
 " stuff for folds. 
 " set paste -- this makes macros fail
-call pathogen#runtime_append_all_bundles()
+call pathogen#infect()
 call pathogen#helptags()
 set pastetoggle=<F5>
 set pastetoggle=<F2>
@@ -34,6 +34,7 @@ endif
 ":filetype on
 ":autocmd filetype *   set nocindent
 ":autocmd filetype c,h set formatoptions=cq cindent foldmethod=syntax " from GK
+filetype plugin indent on
 
 set tabstop=2       " change to 8 when reading old files
 set shiftwidth=2
@@ -83,6 +84,10 @@ autocmd BufReadPost *
     \ endif
 
 autocmd BufEnter *.py, set et ts=4 sw=4 wm=8 autoindent
+
+
+" Autocompile coffee files as they are saved
+"autocmd BufWritePost *.coffee silent CoffeeMake -b | cwindow
 
 " GK's preferred latex colors (must have .vim/colors/latex.vim file)
 ":autocmd filetype tex :color latex
