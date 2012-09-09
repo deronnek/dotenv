@@ -41,6 +41,13 @@ set shiftwidth=2
 set expandtab       
 set nowrap
 
+" pretty-print JSON files
+" autocmd BufRead,BufNewFile *.json set filetype=json
+" json.vim is here: http://www.vim.org/scripts/script.php?script_id=1945
+" autocmd Syntax json sou ~/.vim/syntax/json.vim
+" json_reformat is part of yajl: http://lloyd.github.com/yajl/
+" autocmd FileType json set equalprg=json_reformat
+
 "set foldmethod=indent " usually i do {{{,}}} 
 "set foldexpr=getline(v:lnum)[0]==\"\\t\"    " everything that starts with a tab
 "set foldexpr=getline(v:lnum)[0]==\"\^class\"    " everything that starts with a tab
