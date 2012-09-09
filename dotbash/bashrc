@@ -1,6 +1,6 @@
 source $HOME/.bash_aliases
 source /etc/bash_completion
-export PATH="$HOME/bin:$HOME/local/bin:$HOME/gitbin:"$PATH
+export PATH="$HOME/bin:$HOME/local/bin:$HOME/dotenv/gitbin:"$PATH
 export LD_LIBRARY_PATH="/usr/lib:$HOME/local/lib"
 export PATH="/usr/local/moab/bin:$PATH"
 
@@ -65,11 +65,7 @@ function _screen_complete {
 }
 complete -F _screen_complete screen
 
-<<<<<<< HEAD
-
 export PATH=$HOME/local/bin:$PATH
-=======
 # Have cpan always use the default response to prompts
 # e.g. always install dependencies
 export PERL_MM_USE_DEFAULT=1
->>>>>>> 0b23003f5412e2d160b2b0dcc4e0481bf6886b45
