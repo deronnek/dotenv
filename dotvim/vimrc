@@ -93,6 +93,7 @@ autocmd BufReadPost *
 autocmd BufEnter *.py, set et ts=4 sw=4 wm=8 autoindent
 
 
+
 " Autocompile coffee files as they are saved
 "autocmd BufWritePost *.coffee silent CoffeeMake -b | cwindow
 
@@ -101,6 +102,7 @@ autocmd BufEnter *.py, set et ts=4 sw=4 wm=8 autoindent
  
 "KDR's preferred latex colors
 :autocmd filetype tex :color kdrtex
+:autocmd BufEnter *.tex set nosmartindent
 "
 " because i don't understand terminal settings but i want to see what it said.
 " set title
