@@ -4,10 +4,16 @@ export PATH="$HOME/bin:$HOME/local/bin:$HOME/gitbin:"$PATH
 export LD_LIBRARY_PATH="/usr/lib:$HOME/local/lib"
 export PATH="/usr/local/moab/bin:$PATH"
 
+# quick search of process list
+# (last entry is always the grep process itself)
 function pss {
-  ps aux | grep -Ei "($@|%CPU)";
+  ps aux | grep -Ei "($@|%CPU)" | head -n-1;
 }
 
+# quick search of history
+function hgrep {
+  history | grep $@ | head -n-1;
+}
 
 # Open up the most recently modified file in a directory
 function vilatest {
