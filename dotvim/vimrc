@@ -103,6 +103,17 @@ autocmd BufEnter *.py, set et ts=4 sw=4 wm=8 autoindent
 "KDR's preferred latex colors
 :autocmd filetype tex :color kdrtex
 :autocmd BufEnter *.tex set nosmartindent
+
+"Make unicode work the way it should in the first place
+if has("multi_byte")
+  if &termencoding == ""
+    let &termencoding = &encoding
+  endif
+  set encoding=utf-8
+  setglobal fileencoding=utf-8
+  "setglobal bomb
+  set fileencodings=ucs-bom,utf-8,latin1
+endif
 "
 " because i don't understand terminal settings but i want to see what it said.
 " set title
