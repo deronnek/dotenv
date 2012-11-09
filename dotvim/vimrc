@@ -136,6 +136,8 @@ iab DATE  <C-R>=strftime("%Y.%m.%d")<CR>
 :map <F1> <esc>
 :imap <F1> <esc>
 
+:map <F5> :make <CR>
+
 " append date after the cursor when hitting F2 (command-mode):
 ":map <F2> a<C-R>=strftime("%c")<CR><Esc>
 
