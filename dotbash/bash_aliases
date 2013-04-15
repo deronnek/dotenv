@@ -26,3 +26,4 @@ alias glu="ssh -X glu16.cs.umn.edu"
 alias glt="ssh 10.1.21.201"
 # make bc work with floating points by default
 alias bc="bc -l"
+alias pidgin='NSS_SSL_CBC_RANDOM_IV=0 pidgin'
