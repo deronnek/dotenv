@@ -3,6 +3,7 @@ source /etc/bash_completion
 export PATH="$HOME/bin:$HOME/local/bin:$HOME/dotenv/gitbin:"$PATH
 export LD_LIBRARY_PATH="/usr/lib:$HOME/local/lib"
 export PATH="/usr/local/moab/bin:$PATH"
+export LFS="/mnt/lfs"
 
 # quick search of process list
 # (last entry is always the grep process itself)
@@ -41,7 +42,8 @@ else
     # We're not on the console, assume an xterm
     #export PS1="\[\e]2;\u@\H\w\a\[\e[32;40m\]\H:\[\e[34;40m\]\W\[\e[0m\]> \[\e[0m\]" 
     #export PS1="\[\e[32;40m\]\H:\[\e[34;40m\]\W\[\e[0m\]> \[\e[0m\]"
-    export PS1="\[\e[32;40m\]\H:\[\e[34;1m\]\W\[\e[0m\]> \[\e[0m\]"
+    #export PS1="\[\e[32;40m\]\H:\[\e[34;1m\]\W\[\e[0m\]> \[\e[0m\]"
+    export PS1="\[\e[32;32m\]\H:\[\e[34;1m\]\W\[\e[0m\]) \[\e[0m\]"
 fi
 
 export FIGNORE=.o

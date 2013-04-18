@@ -92,7 +92,8 @@ autocmd BufReadPost *
 
 autocmd BufEnter *.py, set et ts=4 sw=4 wm=8 autoindent
 
-
+" when editing makefiles, put in actual tabs
+autocmd FileType make setlocal noexpandtab
 
 " Autocompile coffee files as they are saved
 "autocmd BufWritePost *.coffee silent CoffeeMake -b | cwindow
