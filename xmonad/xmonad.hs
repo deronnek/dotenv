@@ -4,7 +4,7 @@ import XMonad.Config.Gnome
 import XMonad.Layout.NoBorders
 import XMonad.Util.EZConfig(additionalKeys)
 
-newKeys x = M.difference (keys defaultConfig x) (M.fromList $ keysToRemove x)
+newKeys x = M.difference (keys gnomeConfig x) (M.fromList $ keysToRemove x)
 
 keysToRemove :: XConfig Layout ->    [((KeyMask, KeySym),X ())]
 keysToRemove x = [ ((modMask x, xK_b ), return ()) ]
