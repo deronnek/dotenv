@@ -23,7 +23,12 @@ alias strikersam="ssh -X 71.195.50.80 -p 22055"
 alias itasca="ssh -X itasca.msi.umn.edu"
 alias hm1="ssh -X hm1.nxn.com"
 alias glu="ssh -X glu16.cs.umn.edu"
-alias glt="ssh 10.1.21.201"
 # make bc work with floating points by default
 alias bc="bc -l"
 alias pidgin='NSS_SSL_CBC_RANDOM_IV=0 pidgin'
+alias xo='ssh -X images1.nxn.com'
+alias clarus='ssh twinciv1@67.222.51.214'
+alias ..='cd ../..'
+alias ...='cd ../../..'
+alias ....='cd ../../../..'
+alias .....='cd ../../../../..'
