@@ -19,15 +19,13 @@ alias wfmt="mplayer http://wttw.ic.llnwd.net/stream/wttw_wfmt_livebroadcast"
 alias current="mplayer http://currentstream1.publicradio.org:80"
 alias bbc="mplayer mms://livewmstream-ws.bbc.co.uk.edgestreams.net/reflector:48278"
 alias usradar="wget http://radar.weather.gov/Conus/RadarImg/latest.gif -O /tmp/uslatest.gif; eog /tmp/uslatest.gif; rm -f /tmp/uslatest.gif"
-alias strikersam="ssh -X 71.195.50.80 -p 22055"
+alias strikersam='ssh -X 71.195.50.87 -p 22054'
 alias itasca="ssh -X itasca.msi.umn.edu"
 alias hm1="ssh -X hm1.nxn.com"
-alias glu="ssh -X glu16.cs.umn.edu"
 # make bc work with floating points by default
 alias bc="bc -l"
 alias pidgin='NSS_SSL_CBC_RANDOM_IV=0 pidgin'
 alias xo='ssh -X images1.nxn.com'
-alias clarus='ssh twinciv1@67.222.51.214'
 alias ..='cd ../..'
 alias ...='cd ../../..'
 alias ....='cd ../../../..'
