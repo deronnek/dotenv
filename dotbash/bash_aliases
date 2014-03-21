@@ -22,6 +22,7 @@ alias usradar="wget http://radar.weather.gov/Conus/RadarImg/latest.gif -O /tmp/u
 alias strikersam='ssh -X 71.195.50.87 -p 22054'
 alias itasca="ssh -X itasca.msi.umn.edu"
 alias hm1="ssh -X hm1.nxn.com"
+alias glu="ssh -X glu21.cs.umn.edu"
 # make bc work with floating points by default
 alias bc="bc -l"
 alias pidgin='NSS_SSL_CBC_RANDOM_IV=0 pidgin'
