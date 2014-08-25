@@ -4,7 +4,7 @@
 " set paste -- this makes macros fail
 call pathogen#infect()
 call pathogen#helptags()
-set pastetoggle=<F5>
+"set pastetoggle=<F5>
 set pastetoggle=<F2>
 set foldenable    
 " stuff from http://items.sjbach.com/319/configuring-vim-right
@@ -26,10 +26,13 @@ set foldmethod=marker
 set foldmarker={{{,}}}
 
 syntax on
-set t_Co=256
-if &t_Co > 8        " if terminal supports colors
-   colors cdefault
-endif
+set background=dark
+colorscheme solarized
+
+"set t_Co=256
+"if &t_Co > 8        " if terminal supports colors
+"   colors cdefault
+"endif
 
 ":filetype on
 ":autocmd filetype *   set nocindent
