@@ -25,11 +25,17 @@ hi Folded ctermfg=DarkGreen
 set foldmethod=marker
 set foldmarker={{{,}}}
 
+" Syntax highlighting/solarized screwing around
 syntax on
-set t_Co=256
-if &t_Co > 8        " if terminal supports colors
-   colors cdefault
-endif
+set background=dark
+set t_Co=16
+colors solarized
+
+" KDR's usual colorscheme
+"set t_Co=256
+"if &t_Co > 8        " if terminal supports colors
+"   colors cdefault
+"endif
 
 ":filetype on
 ":autocmd filetype *   set nocindent
