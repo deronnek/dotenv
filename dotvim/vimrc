@@ -101,15 +101,18 @@ autocmd BufEnter *.py, set et ts=4 sw=4 wm=8 autoindent
 " when editing makefiles, put in actual tabs
 autocmd FileType make setlocal noexpandtab
 
+
 " Autocompile coffee files as they are saved
 "autocmd BufWritePost *.coffee silent CoffeeMake -b | cwindow
 
 " GK's preferred latex colors (must have .vim/colors/latex.vim file)
 ":autocmd filetype tex :color latex
  
-"KDR's preferred latex colors
-:autocmd filetype tex :color kdrtex
+"KDR's old preferred latex colors
+":autocmd filetype tex :color kdrtex
+:autocmd filetype c,h set formatoptions=cq cindent foldmethod=syntax
 :autocmd BufEnter *.tex set nosmartindent
+let perl_fold = 1
 
 "Make unicode work the way it should in the first place
 if has("multi_byte")
