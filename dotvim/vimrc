@@ -4,7 +4,7 @@
 " set paste -- this makes macros fail
 call pathogen#infect()
 call pathogen#helptags()
-set pastetoggle=<F5>
+"set pastetoggle=<F5>
 set pastetoggle=<F2>
 set foldenable    
 " stuff from http://items.sjbach.com/319/configuring-vim-right
@@ -27,11 +27,21 @@ set foldmarker={{{,}}}
 
 " Syntax highlighting/solarized screwing around
 syntax on
-set background=dark
-set t_Co=16
-colors solarized
 
-" KDR's usual colorscheme
+"if(strftime("%H") > 5 && strftime("%H") < 17)
+"  set background=light 
+"else
+"  set background=dark
+"endif
+
+set background=dark 
+set t_Co=16
+colorscheme solarized
+
+
+" Arch linux VM specific (prevents annoying "Can't delete backup file"
+" warnings
+"set backupdir=~/.vim/backup
 "set t_Co=256
 "if &t_Co > 8        " if terminal supports colors
 "   colors cdefault
