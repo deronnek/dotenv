@@ -96,7 +96,7 @@ autocmd BufReadPost *
     \   exe "normal g'\"" |
     \ endif
 
-autocmd BufEnter *.py, set et ts=4 sw=4 wm=8 autoindent
+autocmd BufEnter *.py, set et ts=4 sw=4 wm=8 autoindent foldmethod=indent
 
 " when editing makefiles, put in actual tabs
 autocmd FileType make setlocal noexpandtab
