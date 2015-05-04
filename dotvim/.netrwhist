@@ -1,11 +1,2 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =9
-let g:netrw_dirhist_1='/soft/perl/nXn'
-let g:netrw_dirhist_2='/home/deronne/work-svn-1.4.6/ocr/old-ocr'
-let g:netrw_dirhist_3='/home/deronne/work-svn-1.4.6/ocr/script'
-let g:netrw_dirhist_4='/home/deronne/work-svn-1.4.6/semantic_equivalence'
-let g:netrw_dirhist_5='/home/deronne/work-svn-1.4.6/ipc'
-let g:netrw_dirhist_6='/home/deronne/work-svn-1.4.6/ipc/scripts'
-let g:netrw_dirhist_7='/home/deronne/stuff'
-let g:netrw_dirhist_8='/home/deronne/test'
-let g:netrw_dirhist_9='/home/deronne/work-svn-1.4.6/alpha-score/scripts'
+let g:netrw_dirhist_cnt =0
