@@ -23,4 +23,4 @@ ln -s dotenv/oh-my-zsh .oh-my-zsh
 #ln -s dotenv/xmonad/xmobarrc .xmobarrc
 
 echo "xterm-16color|xterm with 16 colors, colors#16, use=xterm," >> /tmp/foo
-sudo tic foo
+sudo tic /tmp/foo
