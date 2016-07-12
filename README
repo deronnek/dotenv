@@ -25,3 +25,5 @@ ln -s dotenv/oh-my-zsh .oh-my-zsh
 echo "xterm-16color|xterm with 16 colors, colors#16, use=xterm," >> /tmp/foo
 sudo tic /tmp/foo
 sudo apt-get install git zsh vim
+git submodule init
+git submodule update
