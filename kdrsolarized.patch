@@ -1,0 +1,20 @@
+544c544
+< exe "hi! Constant"       .s:fmt_none   .s:fg_cyan   .s:bg_none
+---
+> exe "hi! Constant"       .s:fmt_none   .s:fg_violet .s:bg_none
+552c552
+< exe "hi! Identifier"     .s:fmt_none   .s:fg_blue   .s:bg_none
+---
+> exe "hi! Identifier"     .s:fmt_none   .s:fg_green .s:bg_none
+556c556
+< exe "hi! Statement"      .s:fmt_none   .s:fg_green  .s:bg_none
+---
+> exe "hi! Statement"      .s:fmt_none   .s:fg_yellow .s:bg_none
+572c572
+< exe "hi! Type"           .s:fmt_none   .s:fg_yellow .s:bg_none
+---
+> exe "hi! Type"           .s:fmt_none   .s:fg_green .s:bg_none
+773c773
+< exe "hi! perlVarPlain"   . s:fg_yellow .s:bg_back   .s:fmt_none
+---
+> exe "hi! perlVarPlain"   . s:fg_green  .s:bg_back   .s:fmt_none

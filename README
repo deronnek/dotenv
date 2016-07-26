@@ -27,3 +27,4 @@ sudo tic /tmp/foo
 sudo apt-get install git zsh vim
 git submodule init
 git submodule update
+patch .vim/bundle/vim-colors-solarized/colors/solarized.vim dotenv/kdrsolarized.patch
