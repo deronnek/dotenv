@@ -42,8 +42,8 @@ colors solarized
 ":autocmd filetype c,h set formatoptions=cq cindent foldmethod=syntax " from GK
 filetype plugin indent on
 
-set tabstop=2       " change to 8 when reading old files
-set shiftwidth=2
+set tabstop=4       " change to 8 when reading old files
+set shiftwidth=4
 set expandtab       
 set nowrap
 

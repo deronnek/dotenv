@@ -7,13 +7,16 @@ mv .bash_aliases .bash_aliases_orig
 mv .screenrc .screenrc_orig
 mv .vimrc .vimrc_orig
 mv .vim .vim_orig
-mv .xmonad .xmonad_orig
-mv .xmobarrc .xmobarrc_orig
+#mv .xmonad .xmonad_orig
+#mv .xmobarrc .xmobarrc_orig
 #
 ln -s dotenv/dotbash/bashrc .bashrc
 ln -s dotenv/dotbash/bash_aliases .bash_aliases
 ln -s dotenv/dotbash/screenrc .screenrc
 ln -s dotenv/dotvim/vimrc .vimrc
 ln -s dotenv/dotvim .vim
-ln -s dotenv/xmonad .xmonad
-ln -s dotenv/xmonad/xmobarrc .xmobarrc
+ln -s dotenv/dircolors .dircolors
+ln -s dotenv/dottmux/tmux.conf .tmux.conf
+ln -s dotenv/oh-my-zsh .oh-my-zsh
+echo "xterm-16color|xterm with 16 colors, colors#16, use=xterm," >> /tmp/foo
+sudo tic foo
