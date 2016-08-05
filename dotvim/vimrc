@@ -1,10 +1,28 @@
-" dseelig vimrc - 2005.06.20 
-" deronnek vimrc - 2007.01.22 
-" stuff for folds. 
-" set paste -- this makes macros fail
-call pathogen#infect()
-call pathogen#helptags()
-set pastetoggle=<F5>
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'altercation/vim-colors-solarized' " probably don't ever want to update this
+Plugin 'pangloss/vim-javascript'
+Plugin 'digitaltoad/vim-pug.git' " jade templating engine syntax highlighting
+
+" The following are examples of different formats supported.
+" Keep Plugin commands between vundle#begin/end.
+" Git plugin not hosted on GitHub
+"Plugin 'git://git.wincent.com/command-t.git'
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+
+"set pastetoggle=<F5>
 set pastetoggle=<F2>
 set foldenable    
 " stuff from http://items.sjbach.com/319/configuring-vim-right
@@ -27,20 +45,28 @@ set foldmarker={{{,}}}
 
 " Syntax highlighting/solarized screwing around
 syntax on
-set background=dark
-set t_Co=16
-colors solarized
 
-" KDR's usual colorscheme
+"if(strftime("%H") > 5 && strftime("%H") < 17)
+"  set background=light 
+"else
+"  set background=dark
+"endif
+
+set background=dark 
+set t_Co=16
+colorscheme solarized
+
+
+" Arch linux VM specific (prevents annoying "Can't delete backup file"
+" warnings
+"set backupdir=~/.vim/backup
 "set t_Co=256
 "if &t_Co > 8        " if terminal supports colors
 "   colors cdefault
 "endif
 
-":filetype on
 ":autocmd filetype *   set nocindent
 ":autocmd filetype c,h set formatoptions=cq cindent foldmethod=syntax " from GK
-filetype plugin indent on
 
 set tabstop=4       " change to 8 when reading old files
 set shiftwidth=4
