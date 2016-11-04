@@ -90,3 +90,7 @@ source ~/.rvm/scripts/rvm
 #if [ "$HOSTNAME" == 'hm1' ]; then
 #  ssh hm13
 #fi
+
+# added by Anaconda3 4.1.1 installer
+export PATH="/data/anaconda/anaconda3/bin:$PATH"
+alias pyplif='/home/deronne/.pyplif/pyplif.py'
