@@ -6,7 +6,8 @@ export ZSH=$HOME/.oh-my-zsh
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
 #ZSH_THEME="robbyrussell"
-ZSH_THEME="candy"
+#ZSH_THEME="candy"
+ZSH_THEME="kdr"
 #ZSH_THEME="kphoen"
 
 # Uncomment the following line to use case-sensitive completion.
@@ -89,5 +90,10 @@ eval `dircolors /home/deronne/.dircolors`
 if [[ -s '/etc/zsh_command_not_found' ]]; then
       source '/etc/zsh_command_not_found'
 fi
-
+if [[ $HOST == 'hm12' ]]; then
+    echo "***************************************************************************"
+    echo "You are on hm12.  Setting nice value of shell and all child processes to 19"
+    renice -n 19 -p $$
+    echo "***************************************************************************"
+fi
 #. /rd/deronne/torch/install/bin/torch-activate

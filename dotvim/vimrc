@@ -3,6 +3,7 @@ filetype off                  " required
 
 " Make powerline always appear
 set laststatus=2
+set cursorline
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -19,6 +20,11 @@ Plugin 'vim-scripts/indentpython.vim'
 Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 Bundle 'Valloric/YouCompleteMe'
 Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'tmhedberg/SimpylFold' " proper folding for python files
+" Haven't decided if I like powerline or airline better.  powerline seems to
+" know about my git branch without install fugitive which is nice.
+"Plugin 'vim-airline/vim-airline'
+"Plugin 'vim-airline/vim-airline-themes'
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
 " Git plugin not hosted on GitHub
@@ -27,6 +33,19 @@ Plugin 'christoomey/vim-tmux-navigator'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
+
+"let g:airline_theme='solarized'
+" Blayne's c-code formatter (interferes with my usual binding for =)
+"set equalprg=clang-format
+"
+
+" See 
+" http://joshldavis.com/2014/04/05/vim-tab-madness-buffers-vs-tabs/ 
+" for more stuff you should consider for vim buffers/tabs
+" Enable the list of buffers
+let g:airline#extensions#tabline#enabled = 1
+" Show just the filename
+let g:airline#extensions#tabline#fnamemod = ':t'
 
 "set pastetoggle=<F5>
 set pastetoggle=<F2>
@@ -81,7 +100,8 @@ set tabstop=4       " change to 8 when reading old files
 set shiftwidth=4
 set expandtab       
 set nowrap
-set softtabstop=0 smarttab
+set softtabstop=0
+"smarttab
 
 " pretty-print JSON files
 " autocmd BufRead,BufNewFile *.json set filetype=json
@@ -133,13 +153,13 @@ autocmd BufReadPost *
     \ endif
 
 "autocmd BufEnter *.py, set et ts=4 sw=4 wm=8 autoindent foldmethod=indent
-au BufNewFile,BufRead *.py set
+au BufEnter,BufNewFile,BufRead *.py set
     \ tabstop=4
     \ softtabstop=4
     \ shiftwidth=4
     \ textwidth=79
     \ expandtab
-    \ smarttab
+"    \ smarttab
     \ autoindent
     \ foldmethod=indent
     \ fileformat=unix
@@ -190,12 +210,15 @@ endif
 iab YDATE <C-R>=strftime("%a %b %d %T %Z %Y")<CR>
 iab DATE  <C-R>=strftime("%Y.%m.%d")<CR>
 
+" Wrap paragraphs with =
 :map = gqap
-" i don't ever use F1 to get to help. but i do hit it while trying to ESC.
+
+" seeligd: i don't ever use F1 to get to help. but i do hit it while trying to ESC.
 :map <F1> <esc>
 :imap <F1> <esc>
 
 :map <F5> :make <CR>
+:autocmd BufEnter *.tex map <F5> :!pdflatex % <CR>
 set spell
 
 " append date after the cursor when hitting F2 (command-mode):

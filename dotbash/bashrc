@@ -94,3 +94,9 @@ source ~/.rvm/scripts/rvm
 # added by Anaconda3 4.1.1 installer
 export PATH="/data/anaconda/anaconda3/bin:$PATH"
 alias pyplif='/home/deronne/.pyplif/pyplif.py'
+
+# added by Anaconda2 4.2.0 installer
+export PATH="/rd/anaconda/anaconda2/bin:$PATH"
+
+# added by Anaconda3 4.2.0 installer
+export PATH="/data/anaconda/anaconda3/bin:$PATH"
