@@ -32,4 +32,5 @@ alias ..='cd ../..'
 alias ...='cd ../../..'
 alias ....='cd ../../../..'
 alias .....='cd ../../../../..'
-alias tmux="TERM=screen-256color-bce tmux"
+#alias tmux="TERM=screen-256color-bce tmux"
+alias tmux='TERMINFO=/home/kderonne/.terminfo/x/xterm-16color TERM=xterm-16color tmux -u -2'

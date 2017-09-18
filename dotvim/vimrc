@@ -18,7 +18,7 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'digitaltoad/vim-pug.git' " jade templating engine syntax highlighting
 Plugin 'vim-scripts/indentpython.vim'
 Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
-Bundle 'Valloric/YouCompleteMe'
+"Bundle 'Valloric/YouCompleteMe'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'tmhedberg/SimpylFold' " proper folding for python files
 " Haven't decided if I like powerline or airline better.  powerline seems to

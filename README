@@ -1,10 +1,10 @@
 Repository containing my development environment.
 # Setup commands:
-git clone git://github.com/deronnek/dotenv.git
+git clone http://github.com/deronnek/dotenv.git
 #
 mv .bashrc .bashrc_orig
 mv .bash_aliases .bash_aliases_orig
-mv .screenrc .screenrc_orig
+#mv .screenrc .screenrc_orig
 mv .vimrc .vimrc_orig
 mv .vim .vim_orig
 mv .zshrc .zshrc_orig
@@ -13,7 +13,7 @@ mv .zshrc .zshrc_orig
 #
 ln -s dotenv/dotbash/bashrc .bashrc
 ln -s dotenv/dotbash/bash_aliases .bash_aliases
-ln -s dotenv/dotbash/screenrc .screenrc
+#ln -s dotenv/dotbash/screenrc .screenrc
 ln -s dotenv/dotvim/vimrc .vimrc
 ln -s dotenv/dotvim .vim
 ln -s dotenv/dircolors .dircolors
@@ -22,9 +22,9 @@ ln -s dotenv/tmux/tmux.conf .tmux.conf
 #ln -s dotenv/xmonad .xmonad
 #ln -s dotenv/xmonad/xmobarrc .xmobarrc
 
-echo "xterm-16color|xterm with 16 colors, colors#16, use=xterm," >> /tmp/foo
-sudo tic /tmp/foo
-sudo apt-get install git zsh vim
+echo "xterm-16color|xterm with 16 colors, colors#16, use=xterm," >> ~/foo
+tic ~/foo
+#sudo apt-get install git zsh vim
 git submodule init
 git submodule update
 ln -s ~/dotenv/dotzsh/aliases.zsh ~/.oh-my-zsh/custom/aliases.zsh

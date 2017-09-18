@@ -27,7 +27,7 @@ alias ...='cd ../../..'
 alias ....='cd ../../../..'
 alias .....='cd ../../../../..'
 # fixes for colors (xterm-16color and -2) and fonts (-u)
-alias tmux="TERMINFO=/usr/share/terminfo/x/xterm-16color TERM=xterm-16color tmux -u -2"
+alias tmux="TERMINFO=~/.terminfo/x/xterm-16color TERM=xterm-16color tmux -u -2"
 # htop is much better than top
 alias top="htop"
 alias python="python3"

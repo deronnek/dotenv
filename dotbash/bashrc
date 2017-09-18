@@ -1,5 +1,5 @@
 source $HOME/.bash_aliases
-source /etc/bash_completion
+#source /etc/bash_completion
 export PATH="$HOME/bin:$HOME/local/bin:$HOME/dotenv/gitbin:/opt/mysql/server-5.6/bin:"$PATH
 export LD_LIBRARY_PATH="/usr/lib:$HOME/local/lib"
 export PATH="/usr/local/moab/bin:$PATH"
@@ -78,9 +78,9 @@ export PATH=$HOME/local/bin:$PATH
 # e.g. always install dependencies
 export PERL_MM_USE_DEFAULT=1
 
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+#export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
-source ~/.rvm/scripts/rvm
+#source ~/.rvm/scripts/rvm
 ##if [ -z $PS1 ]
 #then
 #  /usr/bin/zsh
@@ -92,11 +92,11 @@ source ~/.rvm/scripts/rvm
 #fi
 
 # added by Anaconda3 4.1.1 installer
-export PATH="/data/anaconda/anaconda3/bin:$PATH"
-alias pyplif='/home/deronne/.pyplif/pyplif.py'
+#export PATH="/data/anaconda/anaconda3/bin:$PATH"
+#alias pyplif='/home/deronne/.pyplif/pyplif.py'
 
 # added by Anaconda2 4.2.0 installer
-export PATH="/rd/anaconda/anaconda2/bin:$PATH"
+#export PATH="/rd/anaconda/anaconda2/bin:$PATH"
 
 # added by Anaconda3 4.2.0 installer
-export PATH="/data/anaconda/anaconda3/bin:$PATH"
+#export PATH="/data/anaconda/anaconda3/bin:$PATH"
