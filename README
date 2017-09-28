@@ -8,6 +8,7 @@ mv .bash_aliases .bash_aliases_orig
 mv .vimrc .vimrc_orig
 mv .vim .vim_orig
 mv .zshrc .zshrc_orig
+mv ~/bin bin_orig
 #mv .xmonad .xmonad_orig
 #mv .xmobarrc .xmobarrc_orig
 #
@@ -19,17 +20,22 @@ ln -s dotenv/dotvim .vim
 ln -s dotenv/dircolors .dircolors
 ln -s dotenv/dotzsh/zshrc .zshrc
 ln -s dotenv/tmux/tmux.conf .tmux.conf
+ln -s ~/dotenv/gitbin ~/bin
 #ln -s dotenv/xmonad .xmonad
 #ln -s dotenv/xmonad/xmobarrc .xmobarrc
 
 echo "xterm-16color|xterm with 16 colors, colors#16, use=xterm," >> ~/foo
 tic ~/foo
+# only if you're on an old ubuntu system
 #sudo apt-get install git zsh vim
+cd dotenv
 git submodule init
 git submodule update
 ln -s ~/dotenv/dotzsh/aliases.zsh ~/.oh-my-zsh/custom/aliases.zsh
 ln -s dotenv/oh-my-zsh .oh-my-zsh
 vim +PluginInstall +qall
-patch .vim/bundle/vim-colors-solarized/colors/solarized.vim dotenv/kdrsolarized.patch
+# patched version now in git
+#patch .vim/bundle/vim-colors-solarized/colors/solarized.vim dotenv/kdrsolarized.patch
+git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
 cd ~/dotenv/dotvim/bundle/YouCompleteMe
 ./install.py --clang-completer --tern-completer
