@@ -1,2 +1,4 @@
 dotvim/bundle/*
 dotvim/.netrwhist
+# Keep optum-specifc things out of the public repository
+dotzsh/optum.zsh
