@@ -38,6 +38,7 @@ mkdir ~/.emacs.d/elpa
 mv ~/dotenv/emacs.d/init.el ~/dotenv/emacs.d/init.el_orig
 ln -s ~/dotenv/spacemacs/init.el ~/dotenv/emacs.d/init.el
 ln -s ~/dotenv/spacemacs/elpa/color-theme-solarized-20171024.825 ~/.emacs.d/elpa/color-theme-solarized-20171024.825
+ln -s ~/dotenv/dotspacemacs ~/.spacemacs
 vim +PluginInstall +qall
 # patched version now in git
 #patch .vim/bundle/vim-colors-solarized/colors/solarized.vim dotenv/kdrsolarized.patch
