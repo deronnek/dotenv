@@ -257,6 +257,14 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+#alias wvm="ssh 192.168.1.109"
+#alias top="htop"
+#alias python='python3'
+#alias pip='pip3'
+#export PATH="/Users/deronne/anaconda3/bin:$PATH"
+# For linux:
+#eval `dircolors $HOME/.dircolors`
+#tmux='TERMINFO=/usr/share/terminfo/x/xterm-16color TERM=xterm-16color tmux -2'
 alias vi="vim"
 alias top="top -o cpu"
 # Make sort ignore the utf-8 locale
