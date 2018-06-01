@@ -31,8 +31,9 @@ tic ~/foo
 cd dotenv
 git submodule init
 git submodule update
+ln -s ~/dotenv/oh-my-zsh ~/.oh-my-zsh
 ln -s ~/dotenv/dotzsh/aliases.zsh ~/.oh-my-zsh/custom/aliases.zsh
-ln -s dotenv/oh-my-zsh .oh-my-zsh
+mv .emacs.d .emacs.d_orig
 ln -s ~/dotenv/emacs.d ~/.emacs.d
 mkdir ~/.emacs.d/elpa
 mv ~/dotenv/emacs.d/init.el ~/dotenv/emacs.d/init.el_orig
@@ -41,9 +42,9 @@ ln -s ~/dotenv/spacemacs/elpa/color-theme-solarized-20171024.825 ~/.emacs.d/elpa
 rm ~/.emacs.d/layers/+vim/vim-powerline/local/vim-powerline/vim-colors.el
 ln -s ~/dotenv/spacemacs/vim-colors.el ~/.emacs.d/layers/+vim/vim-powerline/local/vim-powerline/vim-colors.el
 ln -s ~/dotenv/dotspacemacs ~/.spacemacs
-vim +PluginInstall +qall
 # patched version now in git
 #patch .vim/bundle/vim-colors-solarized/colors/solarized.vim dotenv/kdrsolarized.patch
 git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
+vim +PluginInstall +qall
 cd ~/dotenv/dotvim/bundle/YouCompleteMe
 ./install.py --clang-completer --tern-completer
