@@ -29,8 +29,7 @@ tic ~/foo
 # only if you're on an old ubuntu system
 #sudo apt-get install git zsh vim
 cd dotenv
-git submodule init
-git submodule update
+git submodule update --init --recursive
 ln -s ~/dotenv/oh-my-zsh ~/.oh-my-zsh
 ln -s ~/dotenv/dotzsh/aliases.zsh ~/.oh-my-zsh/custom/aliases.zsh
 mv .emacs.d .emacs.d_orig
