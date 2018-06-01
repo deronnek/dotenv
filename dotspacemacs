@@ -31,9 +31,12 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
+     yaml
+     markdown
      csv
      vimscript
      python
+     ess
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
@@ -45,14 +48,14 @@ values."
      ;; better-defaults
      colors
      emacs-lisp
-     ess
+     ;;ess
      ;;(geolocation :variables
-      ;;            geolocation-enable-location-service t
-       ;;           geolocation-enable-weather-forecast t)
+     ;;             geolocation-enable-location-service t
+     ;;             geolocation-enable-weather-forecast t)
      git
      ;; markdown
      gtags
-     org
+     (org :variables org-enable-github-support t)
      ;; (shell :variables
      ;;        shell-default-height 30
      ;;        shell-default-position 'bottom)
@@ -67,11 +70,11 @@ values."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(color-theme-solarized mic-paren outshine)
+   dotspacemacs-additional-packages '(color-theme-solarized mic-paren outshine vimish-fold)
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '(color-theme-solarized)
    ;; A list of packages that will not be installed and loaded.
-   dotspacemacs-excluded-packages '(highlight-parentheses smartparens ess-R-object-popup)
+   dotspacemacs-excluded-packages '(highlight-parentheses smartparens ess-R-object-popup org-projectile)
    ;; Defines the behaviour of Spacemacs when installing packages.
    ;; Possible values are `used-only', `used-but-keep-unused' and `all'.
    ;; `used-only' installs only explicitly used packages and uninstall any
@@ -323,8 +326,8 @@ This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
 
-  (require 'outshine)
-  (add-hook 'outline-minor-mode-hook 'outshine-hook-function)
+  ;;(require 'outshine)
+  ;;(add-hook 'outline-minor-mode-hook 'outshine-hook-function)
 ;; Left as an example of how to load files
 ;;(load "~/.emacs.d/outline-mode-folding-python-elisp-shell.el")
 
@@ -338,6 +341,12 @@ you should place your code here."
 ;;                              ("T" "Tickler" entry
 ;;                               (file+headline "~/gtd/tickler.org" "Tickler")
 ;;                               "* %i%? \n %U")))
+
+(setq org-capture-templates
+  (quote
+   (("t" "Todo item for KDR2" entry
+     (file+olp "~/todo.org" "under heading")
+     "** TODO %?"))))
 
 (setq org-enforce-todo-dependencies t)
 (setq org-refile-targets '((nil :maxlevel . 5) (org-agenda-files :maxlevel . 5)))
@@ -402,6 +411,7 @@ you should place your code here."
 
   (global-set-key (kbd "C-c a") 'my-increment-number-at-point)
   (global-set-key (kbd "C-c x") 'my-decrement-number-at-point)
+  (spacemacs/helm-gtags-define-keys-for-mode 'js2-mode)
 
   ;; Make = run M-q (like my :gqap alias in vim)
   (define-key evil-normal-state-map "=" 'fill-paragraph)
@@ -471,8 +481,9 @@ you should place your code here."
                                           (spacemacs/load-theme 'solarized)
                                           ))
 
-(setq sunshine-appid "196331d274fab49829b64dd572112412")
+(setq sunshine-appid "8fd958ce8000ac8f740ddcf77d487eae")
 ;;(setq sunshine-location "55435,USA")
+(setq sunshine-location "5037649")
 (setq sunshine-show-icons t)
 
 ;; These four were suggested as a fix for emacs hanging on file open
@@ -500,12 +511,13 @@ you should place your code here."
  '(evil-want-Y-yank-to-eol nil)
  '(org-capture-templates
    (quote
-    (("t" "Todo item" entry
-      (file "~/notes/todo.org")
-      "**TODO "))))
+    (("t" "Todo item for KDR" entry
+      (file+olp "~/notes/todo.org" "Short term")
+      "** TODO %?"))))
  '(package-selected-packages
    (quote
-    (outshine outorg yafolding vimish-fold origami web-mode tagedit slim-mode scss-mode sass-mode pug-mode less-css-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data ess-smart-equals ess-R-data-view ctable ess julia-mode powerline spinner org-category-capture log4e gntp parent-mode helm-gtags gitignore-mode flx iedit anzu undo-tree highlight diminish ycmd pkg-info request-deferred let-alist request deferred epl bind-map packed auto-complete popup s theme-changer sunshine rase osx-location goto-chg yasnippet dash-functional async dash bind-key anaconda-mode smartparens evil flyspell-correct company helm helm-core avy alert projectile org-plus-contrib magit magit-popup git-commit ghub with-editor hydra pythonic f rainbow-mode rainbow-identifiers color-identifiers-mode vimrc-mode dactyl-mode csv-mode pos-tip flycheck ggtags color-theme highlight-parentheses yapfify ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline smeargle restart-emacs rainbow-delimiters pyvenv pytest pyenv-mode py-isort popwin pip-requirements persp-mode pcre2el paradox orgit org-projectile org-present org-pomodoro org-download org-bullets open-junk-file neotree move-text mic-paren magit-gitflow macrostep lorem-ipsum live-py-mode linum-relative link-hint info+ indent-guide hy-mode hungry-delete htmlize hl-todo highlight-numbers highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-pydoc helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-descbinds helm-company helm-c-yasnippet helm-ag google-translate golden-ratio gnuplot gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link fuzzy flyspell-correct-helm flycheck-ycmd flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu elisp-slime-nav dumb-jump define-word cython-mode company-ycmd company-statistics company-anaconda column-enforce-mode color-theme-solarized clean-aindent-mode auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell)))
+    (yaml-mode mmm-mode markdown-toc markdown-mode gh-md ox-gfm org-mime outshine outorg yafolding vimish-fold origami web-mode tagedit slim-mode scss-mode sass-mode pug-mode less-css-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data ess-smart-equals ess-R-data-view ctable ess julia-mode powerline spinner org-category-capture log4e gntp parent-mode helm-gtags gitignore-mode flx iedit anzu undo-tree highlight diminish ycmd pkg-info request-deferred let-alist request deferred epl bind-map packed auto-complete popup s theme-changer sunshine rase osx-location goto-chg yasnippet dash-functional async dash bind-key anaconda-mode smartparens evil flyspell-correct company helm helm-core avy alert projectile org-plus-contrib magit magit-popup git-commit ghub with-editor hydra pythonic f rainbow-mode rainbow-identifiers color-identifiers-mode vimrc-mode dactyl-mode csv-mode pos-tip flycheck ggtags color-theme highlight-parentheses yapfify ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline smeargle restart-emacs rainbow-delimiters pyvenv pytest pyenv-mode py-isort popwin pip-requirements persp-mode pcre2el paradox orgit org-projectile org-present org-pomodoro org-download org-bullets open-junk-file neotree move-text mic-paren magit-gitflow macrostep lorem-ipsum live-py-mode linum-relative link-hint info+ indent-guide hy-mode hungry-delete htmlize hl-todo highlight-numbers highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-pydoc helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-descbinds helm-company helm-c-yasnippet helm-ag google-translate golden-ratio gnuplot gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link fuzzy flyspell-correct-helm flycheck-ycmd flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu elisp-slime-nav dumb-jump define-word cython-mode company-ycmd company-statistics company-anaconda column-enforce-mode color-theme-solarized clean-aindent-mode auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell)))
+ '(paradox-github-token t)
  '(solarized-broken-srgb t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
