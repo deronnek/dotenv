@@ -2,3 +2,5 @@ dotvim/bundle/*
 dotvim/.netrwhist
 # Keep optum-specifc things out of the public repository
 dotzsh/optum.zsh
+emacs.d/init.el
+emacs.d/layers/+vim/vim-powerline/local/vim-powerline/vim-colors.el
