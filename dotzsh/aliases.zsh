@@ -30,8 +30,8 @@ alias .....='cd ../../../../..'
 #alias tmux="TERMINFO=~/.terminfo/x/xterm-16color TERM=xterm-16color tmux -u -2"
 # htop is much better than top
 alias top="htop"
-alias python="python3"
-alias pip="pip3"
+#alias python="python3"
+#alias pip="pip3"
 
 # quick search of process list                  
 # (last entry is always the grep process itself)
