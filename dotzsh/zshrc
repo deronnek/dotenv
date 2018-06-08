@@ -229,7 +229,6 @@ source $ZSH/oh-my-zsh.sh
 
 #export PATH=$HOME/bin:/usr/local/bin:$PATH
 #export PATH=$PATH:/Library/TeX/Distributions/.DefaultTeX/Contents/Programs/texbi
-# export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
@@ -286,3 +285,4 @@ if [[ -s '/etc/zsh_command_not_found' ]]; then
       source '/etc/zsh_command_not_found'
 fi
 
+alias python='python3'

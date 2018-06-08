@@ -25,6 +25,7 @@ Plugin 'tmhedberg/SimpylFold' " proper folding for python files
 " know about my git branch without install fugitive which is nice.
 "Plugin 'vim-airline/vim-airline'
 "Plugin 'vim-airline/vim-airline-themes'
+
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
 " Git plugin not hosted on GitHub
@@ -65,8 +66,8 @@ set backspace=indent,eol,start
  
 "hi Folded ctermfg=DarkGreen ctermbg=Black
 hi Folded ctermfg=DarkGreen 
-set foldmethod=marker
-set foldmarker={{{,}}}
+set foldmethod=indent
+"set foldmarker={{{,}}}
 
 " Syntax highlighting/solarized screwing around
 syntax on
