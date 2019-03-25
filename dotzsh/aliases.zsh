@@ -1,7 +1,7 @@
 alias gdb="gdb --args";
 # Remove all files in the current directory with size zero (remove zero size files)
 alias rmzsf="find . -maxdepth 1 -size 0 -exec rm {} \;"
-alias ssh="ssh -X"
+alias ssh="ssh -Y"
 #alias ls="ls --color=auto"
 alias ll="ls -la"
 alias rm="rm -i"
