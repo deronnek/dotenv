@@ -161,9 +161,9 @@ au BufEnter,BufNewFile,BufRead *.py set
     \ expandtab
 "    \ smarttab
     \ autoindent
-    \ foldmethod=indent
     \ fileformat=unix
 
+"\ foldmethod=indent
 "highlight BadWhitespace ctermbg=red guibg=darkred
 "au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
 

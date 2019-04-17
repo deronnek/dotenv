@@ -261,7 +261,7 @@ source $ZSH/oh-my-zsh.sh
 #alias top="htop"
 #alias python='python3'
 #alias pip='pip3'
-#export PATH="/Users/deronne/anaconda3/bin:$PATH"
+export PATH="$HOME/bin:/anaconda3/bin:/usr/local/bin:/usr/local/sbin:$PATH:/Library/TeX/texbin"
 # For linux:
 #eval `dircolors $HOME/.dircolors`
 #tmux='TERMINFO=/usr/share/terminfo/x/xterm-16color TERM=xterm-16color tmux -2'
