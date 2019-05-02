@@ -411,7 +411,8 @@ you should place your code here."
   (setq evilmi-always-simple-jump t)
 
   ;; Scale latex graphics in orgmode -- this causes an error on reboot that I haven't tracked own yet
-  ;;(setq org-format-latex-options (plist-put org-format-latex-options :scale 2.0))
+  (require 'org)
+  (setq org-format-latex-options (plist-put org-format-latex-options :scale 2.0))
   ;;(setq org-format-latex-options :scale 2.0)
 
 (defun my/org-render-latex-fragments ()
@@ -420,9 +421,12 @@ you should place your code here."
              (org-toggle-latex-fragment))
     (org-toggle-latex-fragment)))
 
-(add-hook 'org-mode-hook
-          (lambda ()
-            (add-hook 'after-save-hook 'my/org-render-latex-fragments nil 'make-the-hook-local)))
+;; Make SPC b i toggle latex fragment image
+(spacemacs/set-leader-keys "bi" 'org-toggle-latex-fragment)
+
+;;(add-hook 'org-mode-hook
+;;          (lambda ()
+;;            (add-hook 'after-save-hook 'my/org-render-latex-fragments nil 'make-the-hook-local)))
 
 
   ;; Tab in even on already tabbed lines
