@@ -1,0 +1,1 @@
+export PATH="$HOME/bin:/anaconda3/bin:/usr/local/bin:/usr/local/sbin:$PATH:/Library/TeX/texbin"
