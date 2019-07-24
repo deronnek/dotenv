@@ -330,10 +330,76 @@ This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
 
+
   ;;(require 'outshine)
   ;;(add-hook 'outline-minor-mode-hook 'outshine-hook-function)
 ;; Left as an example of how to load files
 ;;(load "~/.emacs.d/outline-mode-folding-python-elisp-shell.el")
+
+  ;; From https://zzamboni.org/post/beautifying-org-mode-in-emacs/
+
+  ;; Hide /.../ and *..* for italics and bold
+  (setq org-hide-emphasis-markers t)
+  ;; Change folding marker -- this messes up org bullets for some reason
+  ;; (add-hook 'org-mode-hook (setq org-ellipsis "▾"))
+  (setq org-ellipsis " ☰")
+
+
+  (font-lock-add-keywords 'org-mode
+                          '(("^ *\\([-]\\) "
+                             (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
+
+  ;; Spacemacs actually takes care of this in the org layer
+  ;; (use-package org-bullets
+  ;;    :config
+  ;;    (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
+
+  ;; (let* ((variable-tuple
+  ;;       (cond ((x-list-fonts "Source Sans Pro") '(:font "Source Sans Pro"))
+  ;;             ((x-list-fonts "Lucida Grande")   '(:font "Lucida Grande"))
+  ;;             ((x-list-fonts "Verdana")         '(:font "Verdana"))
+  ;;             ((x-family-fonts "Sans Serif")    '(:family "Sans Serif"))
+  ;;             (nil (warn "Cannot find a Sans Serif Font.  Install Source Sans Pro."))))
+  ;;      (base-font-color     (face-foreground 'default nil 'default))
+  ;;      (headline           `(:inherit default :weight bold :foreground ,base-font-color)))
+
+  ;; (custom-theme-set-faces
+  ;;  'user
+  ;;  `(org-level-8 ((t (,@headline ,@variable-tuple))))
+  ;;  `(org-level-7 ((t (,@headline ,@variable-tuple))))
+  ;;  `(org-level-6 ((t (,@headline ,@variable-tuple))))
+  ;;  `(org-level-5 ((t (,@headline ,@variable-tuple))))
+  ;;  `(org-level-4 ((t (,@headline ,@variable-tuple :height 1.1))))
+  ;;  `(org-level-3 ((t (,@headline ,@variable-tuple :height 1.25))))
+  ;;  `(org-level-2 ((t (,@headline ,@variable-tuple :height 1.5))))
+  ;;  `(org-level-1 ((t (,@headline ,@variable-tuple :height 1.75))))
+  ;;  `(org-document-title ((t (,@headline ,@variable-tuple :height 2.0 :underline nil))))))
+
+  ;; (custom-theme-set-faces
+  ;;  'user
+  ;;  '(variable-pitch ((t (:family "Source Sans Pro" :height 180 :weight light))))
+  ;;  '(fixed-pitch ((t ( :family "Inconsolata" :slant normal :weight normal :height 1.0 :width normal)))))
+
+  ;; ;; Enable variable pitch mode automatically in org buffers
+  ;; (add-hook 'org-mode-hook 'variable-pitch-mode)
+
+
+  ;; ;; Resize long lines based on the window
+  ;; (add-hook 'org-mode-hook 'visual-line-mode)
+
+  ;; (custom-theme-set-faces
+  ;;  'user
+  ;;  '(org-block                 ((t (:inherit fixed-pitch))))
+  ;;  '(org-document-info         ((t (:foreground "dark orange"))))
+  ;;  '(org-document-info-keyword ((t (:inherit (shadow fixed-pitch)))))
+  ;;  '(org-link                  ((t (:foreground "royal blue" :underline t))))
+  ;;  '(org-meta-line             ((t (:inherit (font-lock-comment-face fixed-pitch)))))
+  ;;  '(org-property-value        ((t (:inherit fixed-pitch))) t)
+  ;;  '(org-special-keyword       ((t (:inherit (font-lock-comment-face fixed-pitch)))))
+  ;;  '(org-tag                   ((t (:inherit (shadow fixed-pitch) :weight bold :height 0.8))))
+  ;;  '(org-verbatim              ((t (:inherit (shadow fixed-pitch)))))
+  ;;  '(org-indent                ((t (:inherit (org-hide fixed-pitch))))))
+
 
   ;;(set-face-background 'mmm-default-submode-face nil)
 
@@ -353,7 +419,7 @@ you should place your code here."
 
   (mmm-add-mode-ext-class 'python-mode "*.py" 'python-sql)
 
-  ;; enable auto-completion when point is idle on a misspelled word 
+  ;; enable auto-completion when point is idle on a misspelled word
   (setq-default dotspacemacs-configuration-layers
                 '((spell-checking :variables enable-flyspell-auto-completion t)))
 
@@ -367,11 +433,21 @@ you should place your code here."
 ;;                              ("T" "Tickler" entry
 ;;                               (file+headline "~/gtd/tickler.org" "Tickler")
 ;;                               "* %i%? \n %U")))
+;; display time in powerline
+;;(display-time-mode 1)
+
+;;(spaceline-define-segment datetime
+;;  (shell-command-to-string "echo -n $(date '+%a %d %b %I:%M%p')"))
+;;(spaceline-spacemacs-theme 'datetime)
+
+;;(spacemacs|define-mode-line-segment date-time-segment
+;;                                    (shell-command-to-string "echo -n $(date '+%a %d %b %I:%M%p')"))
+;;(add-to-list 'spacemacs-mode-line-right 'date-time-segment)
 
 (setq org-capture-templates
   (quote
    (("t" "Todo item for KDR2" entry
-     (file+olp "~/todo.org" "under heading")
+     (file+olp "~/todo.org" "Next")
      "** TODO %?"))))
 
 (setq org-enforce-todo-dependencies t)
@@ -493,10 +569,10 @@ you should place your code here."
                                  ;;(cursor :background "#b58900"))))
 
   ;; This is how you switch solarized between light and dark
-  ;;(set-terminal-parameter nil 'background-mode 'dark)
-  ;;(set-frame-parameter nil 'background-mode 'dark)
-  (set-terminal-parameter nil 'background-mode 'light)
-  (set-frame-parameter nil 'background-mode 'light)
+  (set-terminal-parameter nil 'background-mode 'dark)
+  (set-frame-parameter nil 'background-mode 'dark)
+  ;; (set-terminal-parameter nil 'background-mode 'light)
+  ;; (set-frame-parameter nil 'background-mode 'light)
 
   ;; Load the theme after all modifications
   ;;(spacemacs/load-theme 'solarized-theme)
@@ -583,12 +659,13 @@ you should place your code here."
  '(org-capture-templates
    (quote
     (("t" "Todo item for KDR" entry
-      (file+olp "~/notes/todo.org" "Short term")
+      (file+olp "~/notes/todo.org" "Next")
       "** TODO %?"))) t)
  '(package-selected-packages
    (quote
     (transient solarized-theme tide json-mode js2-refactor company-tern web-beautify livid-mode skewer-mode simple-httpd json-snatcher json-reformat multiple-cursors js2-mode js-doc tern coffee-mode typescript-mode yaml-mode mmm-mode markdown-toc markdown-mode gh-md ox-gfm org-mime outshine outorg yafolding vimish-fold origami web-mode tagedit slim-mode scss-mode sass-mode pug-mode less-css-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data ess-smart-equals ess-R-data-view ctable ess julia-mode powerline spinner org-category-capture log4e gntp parent-mode helm-gtags gitignore-mode flx iedit anzu undo-tree highlight diminish ycmd pkg-info request-deferred let-alist request deferred epl bind-map packed auto-complete popup s theme-changer sunshine rase osx-location goto-chg yasnippet dash-functional async dash bind-key anaconda-mode smartparens evil flyspell-correct company helm helm-core avy alert projectile org-plus-contrib magit magit-popup git-commit ghub with-editor hydra pythonic f rainbow-mode rainbow-identifiers color-identifiers-mode vimrc-mode dactyl-mode csv-mode pos-tip flycheck ggtags color-theme highlight-parentheses yapfify ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline smeargle restart-emacs rainbow-delimiters pyvenv pytest pyenv-mode py-isort popwin pip-requirements persp-mode pcre2el paradox orgit org-projectile org-present org-pomodoro org-download org-bullets open-junk-file neotree move-text mic-paren magit-gitflow macrostep lorem-ipsum live-py-mode linum-relative link-hint info+ indent-guide hy-mode hungry-delete htmlize hl-todo highlight-numbers highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-pydoc helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-descbinds helm-company helm-c-yasnippet helm-ag google-translate golden-ratio gnuplot gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link fuzzy flyspell-correct-helm flycheck-ycmd flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu elisp-slime-nav dumb-jump define-word cython-mode company-ycmd company-statistics company-anaconda column-enforce-mode color-theme-solarized clean-aindent-mode auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell)))
- '(paradox-github-token t))
+ '(paradox-github-token t)
+ '(vc-follow-symlinks t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
