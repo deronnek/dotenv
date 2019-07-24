@@ -64,7 +64,7 @@ degraded color mode to test the approximate color values for accuracy."
   :type 'number
   :group 'solarized)
 
-(defcustom solarized-scale-org-headlines t
+(defcustom solarized-scale-org-headlines nil
   "Whether `org-mode' headlines should be scaled."
   :type 'boolean
   :group 'solarized)
@@ -444,7 +444,8 @@ the \"Gen RGB\" column in solarized-definitions.el to improve them further."
                 (org-archived (,@fg-base01))
                 (org-link (,@fmt-undr ,@fg-violet))
                 (org-footnote (,@fmt-undr ,@fg-violet))
-                (org-ellipses (,@fg-yellow :strike-through t) )
+                ;;(org-ellipses (,@fg-yellow :strike-through t) )
+                (org-ellipsis ((t (:underline "#B0EEB0" :foreground "#00BB00"))))
                 (org-target (,@fmt-undr))
                 (org-date (,@fmt-undr ,@fg-violet))
                 (org-date-selected (,@fmt-revr ,@fg-red))
