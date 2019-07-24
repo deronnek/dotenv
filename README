@@ -19,6 +19,7 @@ ln -s dotenv/dotvim/vimrc .vimrc
 ln -s dotenv/dotvim .vim
 ln -s dotenv/dircolors .dircolors
 ln -s dotenv/dotzsh/zshrc .zshrc
+ln -s dotenv/dotzsh/zshenv .zshenv
 ln -s dotenv/tmux/tmux.conf .tmux.conf
 ln -s ~/dotenv/gitbin ~/bin
 #ln -s dotenv/xmonad .xmonad

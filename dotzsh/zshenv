@@ -1,0 +1,4 @@
+export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$PATH:"/Library/TeX/Distributions/.DefaultTeX/Contents/Programs/texbin"
+export PATH="/anaconda3/bin:$PATH:/Library/TeX/texbin"
+export PYTHONPATH="/usr/local/python3.6/site-packages"
