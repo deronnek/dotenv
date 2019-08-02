@@ -34,7 +34,7 @@ values."
      javascript
      typescript
      yaml
-     markdown
+     ;;markdown
      csv
      vimscript
      syntax-checking
@@ -62,8 +62,8 @@ values."
      ;; (shell :variables
      ;;        shell-default-height 30
      ;;        shell-default-position 'bottom)
-     spell-checking
-     ;;syntax-checking
+     (spell-checking :variables enable-flyspell-auto-completion t)
+     (syntax-checking :variables syntax-checking-enable-by-default nil)
      theming
      vim-powerline
      ycmd
@@ -342,7 +342,7 @@ you should place your code here."
   (setq org-hide-emphasis-markers t)
   ;; Change folding marker -- this messes up org bullets for some reason
   ;; (add-hook 'org-mode-hook (setq org-ellipsis "▾"))
-  (setq org-ellipsis " ☰")
+  (setq org-ellipsis " ⤵")
 
 
   (font-lock-add-keywords 'org-mode
@@ -410,18 +410,18 @@ you should place your code here."
   ;;     :front "#SQL"
   ;;     :back "#/SQL")))
 
-  (mmm-add-classes
-   '((python-sql
-      :submode sql-mode
-      :face mmm-code-submode-face
-      :front "# SQL\\(\n\\|\t\\)*\\(\[ -_A-Z0-9\]+\\)\\(\[ =\]\\)\\(\"\"\"\\|'''\\)"
-      :back "\\(\"\"\"\\|'''\\)\\( \\|\t\\|\n\\)*\\# /SQL")))
+  ;; (mmm-add-classes
+  ;;  '((python-sql
+  ;;     :submode sql-mode
+  ;;     :face mmm-code-submode-face
+  ;;     :front "# SQL\\(\n\\|\t\\)*\\(\[ -_A-Z0-9\]+\\)\\(\[ =\]\\)\\(\"\"\"\\|'''\\)"
+  ;;     :back "\\(\"\"\"\\|'''\\)\\( \\|\t\\|\n\\)*\\# /SQL")))
 
-  (mmm-add-mode-ext-class 'python-mode "*.py" 'python-sql)
+  ;; (mmm-add-mode-ext-class 'python-mode "*.py" 'python-sql)
 
   ;; enable auto-completion when point is idle on a misspelled word
-  (setq-default dotspacemacs-configuration-layers
-                '((spell-checking :variables enable-flyspell-auto-completion t)))
+  ;;(setq-default dotspacemacs-configuration-layers
+   ;;             '((spell-checking :variables enable-flyspell-auto-completion t)))
 
   ;; GTD OrgMode implementation from here: https://emacs.cafe/emacs/orgmode/gtd/2017/06/30/orgmode-gtd.html
 (setq org-agenda-files '("~/notes/done.org" "~/notes/"))
@@ -536,9 +536,9 @@ you should place your code here."
   ;; Make = run M-q (like my :gqap alias in vim)
   (define-key evil-normal-state-map "=" 'fill-paragraph)
 
-  (setq-default dotspacemacs-configuration-layers
-                '((syntax-checking :variables syntax-checking-enable-by-default nil))
-                )
+  ;;(setq-default dotspacemacs-configuration-layers
+   ;;             '((syntax-checking :variables syntax-checking-enable-by-default nil))
+    ;;            )
 
   ;; Wrap things at 80 columns
   ;;(add-hook 'text-mode-hook '(lambda() (turn-on-auto-fill) (set-fill-column 80)))
@@ -663,7 +663,7 @@ you should place your code here."
       "** TODO %?"))) t)
  '(package-selected-packages
    (quote
-    (transient solarized-theme tide json-mode js2-refactor company-tern web-beautify livid-mode skewer-mode simple-httpd json-snatcher json-reformat multiple-cursors js2-mode js-doc tern coffee-mode typescript-mode yaml-mode mmm-mode markdown-toc markdown-mode gh-md ox-gfm org-mime outshine outorg yafolding vimish-fold origami web-mode tagedit slim-mode scss-mode sass-mode pug-mode less-css-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data ess-smart-equals ess-R-data-view ctable ess julia-mode powerline spinner org-category-capture log4e gntp parent-mode helm-gtags gitignore-mode flx iedit anzu undo-tree highlight diminish ycmd pkg-info request-deferred let-alist request deferred epl bind-map packed auto-complete popup s theme-changer sunshine rase osx-location goto-chg yasnippet dash-functional async dash bind-key anaconda-mode smartparens evil flyspell-correct company helm helm-core avy alert projectile org-plus-contrib magit magit-popup git-commit ghub with-editor hydra pythonic f rainbow-mode rainbow-identifiers color-identifiers-mode vimrc-mode dactyl-mode csv-mode pos-tip flycheck ggtags color-theme highlight-parentheses yapfify ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline smeargle restart-emacs rainbow-delimiters pyvenv pytest pyenv-mode py-isort popwin pip-requirements persp-mode pcre2el paradox orgit org-projectile org-present org-pomodoro org-download org-bullets open-junk-file neotree move-text mic-paren magit-gitflow macrostep lorem-ipsum live-py-mode linum-relative link-hint info+ indent-guide hy-mode hungry-delete htmlize hl-todo highlight-numbers highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-pydoc helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-descbinds helm-company helm-c-yasnippet helm-ag google-translate golden-ratio gnuplot gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link fuzzy flyspell-correct-helm flycheck-ycmd flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu elisp-slime-nav dumb-jump define-word cython-mode company-ycmd company-statistics company-anaconda column-enforce-mode color-theme-solarized clean-aindent-mode auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell)))
+    (flyspell-popup markdown-mode+ lv transient solarized-theme tide json-mode js2-refactor company-tern web-beautify livid-mode skewer-mode simple-httpd json-snatcher json-reformat multiple-cursors js2-mode js-doc tern coffee-mode typescript-mode yaml-mode markdown-toc markdown-mode gh-md ox-gfm org-mime outshine outorg yafolding vimish-fold origami web-mode tagedit slim-mode scss-mode sass-mode pug-mode less-css-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data ess-smart-equals ess-R-data-view ctable ess julia-mode powerline spinner org-category-capture log4e gntp parent-mode helm-gtags gitignore-mode flx iedit anzu undo-tree highlight diminish ycmd pkg-info request-deferred let-alist request deferred epl bind-map packed auto-complete popup s theme-changer sunshine rase osx-location goto-chg yasnippet dash-functional async dash bind-key anaconda-mode smartparens evil flyspell-correct company helm helm-core avy alert projectile org-plus-contrib magit magit-popup git-commit ghub with-editor hydra pythonic f rainbow-mode rainbow-identifiers color-identifiers-mode vimrc-mode dactyl-mode csv-mode pos-tip flycheck ggtags color-theme highlight-parentheses yapfify ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline smeargle restart-emacs rainbow-delimiters pyvenv pytest pyenv-mode py-isort popwin pip-requirements persp-mode pcre2el paradox orgit org-projectile org-present org-pomodoro org-download org-bullets open-junk-file neotree move-text mic-paren magit-gitflow macrostep lorem-ipsum live-py-mode linum-relative link-hint info+ indent-guide hy-mode hungry-delete htmlize hl-todo highlight-numbers highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-pydoc helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-descbinds helm-company helm-c-yasnippet helm-ag google-translate golden-ratio gnuplot gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link fuzzy flyspell-correct-helm flycheck-ycmd flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu elisp-slime-nav dumb-jump define-word cython-mode company-ycmd company-statistics company-anaconda column-enforce-mode color-theme-solarized clean-aindent-mode auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell)))
  '(paradox-github-token t)
  '(vc-follow-symlinks t))
 (custom-set-faces
