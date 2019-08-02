@@ -46,5 +46,5 @@ ln -s ~/dotenv/dotspacemacs ~/.spacemacs
 #patch .vim/bundle/vim-colors-solarized/colors/solarized.vim dotenv/kdrsolarized.patch
 git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
 vim +PluginInstall +qall
-cd ~/dotenv/dotvim/bundle/YouCompleteMe
+cd ~/dotenv/YouCompleteMe
 ./install.py --clang-completer --tern-completer
