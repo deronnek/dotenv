@@ -15,6 +15,7 @@
 ;; Increase gc-cons-threshold, depending on your system you may set it back to a
 ;; lower value in your dotfile (function `dotspacemacs/user-config')
 (setq gc-cons-threshold 100000000)
+(setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3");; fix forpackage not found
 
 (defconst spacemacs-version         "0.200.10" "Spacemacs version.")
 (defconst spacemacs-emacs-min-version   "24.4" "Minimal version of Emacs.")
