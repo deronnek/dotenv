@@ -19,8 +19,8 @@ POWERLEVEL9K_RPROMPT_ON_NEWLINE=true
 # KDR: weather on the command-line.  what.
 #Get the weather information from https://www.apixu.com/
 #Just create a free account to have an API key
-#Download jq do convert json
-zsh_weather(){
+#Download jq to convert json
+weather(){
   local weather=$(curl -s "http://api.apixu.com/v1/current.json?key=46c425f02b2e46c9800191210181801&q=Minneapolis")
   
   local temp=$(echo $weather | jq .current.temp_f)
@@ -41,7 +41,16 @@ zsh_weather(){
   then symbol="\uf185" ; color='%F{yellow}';
   fi
 
-  echo -n "%{$color%}$temp\u00B0F $symbol "
+  color='%F{grey}';
+  if [[ $temp > 70 ]];
+  then color='%F{yellow}';
+  fi
+  if [[ $temp < 32 ]];
+  then color='%F{blue}';
+  fi
+  #echo -n "%{$color%}$temp\u00B0F $symbol "
+  #echo "$color$temp\u00B0F $symbol ^"
+  print -P "$color$temp\u00B0F $symbol"
 }
 
 #KDR: Stolen from the internet.
@@ -82,6 +91,7 @@ POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX="%F{014}\u2570%F{cyan}\uF460%F{073}\uF
 #POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX="%F{008}> %f"
 
 POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX="╭"
+
 #POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX="╰`zsh_weather`\uF460%f%k%F{black}%f "
 #POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX="╰\uF460%f%k%F{black}%f "
 
