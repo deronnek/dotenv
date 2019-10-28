@@ -608,7 +608,7 @@ you should place your code here."
   (interactive)
   (setq bgmode (if (eq (terminal-parameter nil 'background-mode) 'dark) 'light 'dark))
   (set-terminal-parameter nil 'background-mode bgmode)
-  (set-frame-parameter nil 'background-mode bgmode)
+  (set-frame-parameter nil 'background-mode bgmode) 
   (spacemacs/load-theme 'solarized))
 
 ;; Make SPC-b-g switch background
@@ -659,7 +659,7 @@ you should place your code here."
  '(org-capture-templates
    (quote
     (("t" "Todo item for KDR" entry
-      (file+olp "~/notes/todo.org" "Next")
+      (file+olp "~/optum-notes/todo.org" "Next")
       "** TODO %?"))) t)
  '(package-selected-packages
    (quote
