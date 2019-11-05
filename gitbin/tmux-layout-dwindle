@@ -233,6 +233,7 @@ historic_pane=$(tmux last-pane 2>/dev/null \;\
                      display-message -p '#{pane_id}' \;\
                      last-pane) ||: # exit 1 - no last pane
 window_height=$(tmux display-message -p '#{window_height}')
+window_width=$(tmux display-message -p '#{window_width}')
 
 # execute all tmux commands in one shot to avoid flickering and slowness
 exec tmux $({
@@ -266,6 +267,7 @@ exec tmux $({
 
   # divide available space evenly among panes (binary space partitions)
   branch_height=$window_height
+  branch_width=$window_width
   count=1
   for pane_id; do
     if [ $count -eq $# ] && ! $is_vertical; then
@@ -273,12 +275,19 @@ exec tmux $({
     elif [ $(( count % 2 )) -eq 1 ]; then
       # every other pane is a branch in the binary space partition tree
       parent_height=$branch_height
-      branch_height=$(( branch_height / 2 ))
-      if $is_vertical
-      then resize_y=$parent_height
-      else resize_y=$branch_height
+      parent_width=$branch_width
+      #branch_height=$(( branch_height / 2 ))
+      branch_height=$(echo "( $branch_height / 1.618 ) / 1" | bc)
+      branch_width=$(echo "( $branch_width / 1.618 ) / 1" | bc)
+      if $is_vertical; then 
+          resize_y=$parent_height
+          resize_x=$branch_width
+      else 
+          resize_y=$branch_height
+          resize_x=$parent_width
       fi
-      echo resize-pane -t $pane_id -y $resize_y
+      echo resize-pane -t $pane_id -y $resize_y -x $resize_x
+      #echo resize-pane -t $pane_id -y $resize_y -x $resize_x
     fi
     count=$(( count + 1 ))
   done
