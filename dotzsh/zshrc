@@ -17,14 +17,17 @@ POWERLEVEL9K_RPROMPT_ON_NEWLINE=true
 #POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir vcs)
 
 # KDR: weather on the command-line.  what.
-#Get the weather information from https://www.apixu.com/
+#Get the weather information from https://www.weatherstack.com/
 #Just create a free account to have an API key
 #Download jq do convert json
 zsh_weather(){
-  local weather=$(curl -s "http://api.apixu.com/v1/current.json?key=46c425f02b2e46c9800191210181801&q=Minneapolis")
+  #local api_key='2778498938e278888f21342fdfbf2132'
+  #local weather=$(curl -s "http://api.weatherstack.com/current?access_key=$api_key&query=Minneapolis&units=f")
+  local weather=$(cat ~/test.json)
+  echo $weather
   
-  local temp=$(echo $weather | jq .current.temp_f)
-  local condition=$(echo $weather | jq .current.condition.text)
+  local temp=$(echo $weather | jq .current.temperature)
+  local condition=$(echo $weather | jq ".current.weather_descriptions[0]")
   #Default value
   local color='%F{green}'
   local symbol="\uf2c7"
@@ -41,7 +44,7 @@ zsh_weather(){
   then symbol="\uf185" ; color='%F{yellow}';
   fi
 
-  echo -n "%{$color%}$temp\u00B0F $symbol "
+  echo -n "$color$temp\u00B0F $symbol "
 }
 
 #KDR: Stolen from the internet.
@@ -222,7 +225,10 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(
+    git
+    zsh-syntax-highlighting
+    )
 
 source $ZSH/oh-my-zsh.sh
 
