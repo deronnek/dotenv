@@ -21,30 +21,37 @@ POWERLEVEL9K_RPROMPT_ON_NEWLINE=true
 #Just create a free account to have an API key
 #Download jq do convert json
 zsh_weather(){
-  #local api_key='2778498938e278888f21342fdfbf2132'
-  #local weather=$(curl -s "http://api.weatherstack.com/current?access_key=$api_key&query=Minneapolis&units=f")
-  local weather=$(cat ~/test.json)
-  echo $weather
+
+  #list of colors:
+  # for code in {000..255}; do print -P -- "$code: %F{$code}Color%f"; done
+  # for testing, saved output to test.json
+  #local weather=$(cat ~/test.json)
+  #echo $weather
+  # TODO: setup function to cache this so we make max 1 request per hour
+  local api_key='2778498938e278888f21342fdfbf2132'
+  local weather=$(curl -s "http://api.weatherstack.com/current?access_key=$api_key&query=Minneapolis&units=f")
   
   local temp=$(echo $weather | jq .current.temperature)
   local condition=$(echo $weather | jq ".current.weather_descriptions[0]")
   #Default value
-  local color='%F{green}'
+  local color='002'
   local symbol="\uf2c7"
   
   if [[ $condition == *"rain"* ]] ;
-  then symbol="\uf043" ; color='%F{blue}'
+  then symbol="\uf043" ; color='002'
   fi
 
   if [[ $condition == *"cloudy"* || $condition == *"Overcast"* ]] ;
-  then symbol="\uf0c2" ; color='%F{grey}';
+  then symbol="\uf0c2" ; color='011';
   fi
 
   if [[ $condition == *"Sunny"* ]] ;
-  then symbol="\uf185" ; color='%F{yellow}';
+  then symbol="\uf185" ; color='003';
   fi
 
-  echo -n "$color$temp\u00B0F $symbol "
+  print -P -- "%F{$color}$temp\u00B0F $symbol "
+  #echo "$condition $color"
+  #print -P -- "%F{$color}$temp"
 }
 
 #KDR: Stolen from the internet.
