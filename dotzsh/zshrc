@@ -49,6 +49,10 @@ zsh_weather(){
   then symbol="\uf185" ; color='003';
   fi
 
+  if [[ $temp -lt 32 ]];
+  then color='004';
+  fi
+
   print -P -- "%F{$color}$temp\u00B0F $symbol "
   #echo "$condition $color"
   #print -P -- "%F{$color}$temp"
