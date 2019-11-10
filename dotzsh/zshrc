@@ -20,7 +20,7 @@ POWERLEVEL9K_RPROMPT_ON_NEWLINE=true
 #Get the weather information from https://www.weatherstack.com/
 #Just create a free account to have an API key
 #Download jq do convert json
-zsh_weather(){
+weather(){
 
   #list of colors:
   # for code in {000..255}; do print -P -- "$code: %F{$code}Color%f"; done
