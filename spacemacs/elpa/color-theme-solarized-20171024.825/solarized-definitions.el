@@ -830,6 +830,11 @@ the \"Gen RGB\" column in solarized-definitions.el to improve them further."
                 (magit-log-head-label-head (,@fg-violet))
                 (magit-process-ok (,@fg-green :inherit magit-section-title))
                 (magit-process-ng (,@fg-red :inherit magit-section-title))
+                ;; KDR conflict colors
+                (smerge-refined-added (,@fg-green ,@bg-base02))
+                (smerge-refined-removed (,@fg-red ,@bg-base02))
+                (smerge-mine (,@fg-violet ,@bg-base02))
+                (smerge-other (,@fg-blue ,@bg-base02))
                 ;; undo-tree
                 (undo-tree-visualizer-current-face (,@fg-orange))
                 (undo-tree-visualizer-default-face (:inherit shadow))

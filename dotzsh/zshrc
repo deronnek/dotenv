@@ -53,9 +53,16 @@ weather(){
   then color='004';
   fi
 
-  print -P -- "%F{$color}$temp\u00B0F $symbol "
-  #echo "$condition $color"
-  #print -P -- "%F{$color}$temp"
+  color='%F{grey}';
+  if [[ $temp > 70 ]];
+  then color='%F{yellow}';
+  fi
+  if [[ $temp < 32 ]];
+  then color='%F{blue}';
+  fi
+  #echo -n "%{$color%}$temp\u00B0F $symbol "
+  #echo "$color$temp\u00B0F $symbol ^"
+  print -P "$color$temp\u00B0F $symbol"
 }
 
 #KDR: Stolen from the internet.
@@ -96,6 +103,7 @@ POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX="%F{014}\u2570%F{cyan}\uF460%F{073}\uF
 #POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX="%F{008}> %f"
 
 POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX="╭"
+
 #POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX="╰`zsh_weather`\uF460%f%k%F{black}%f "
 #POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX="╰\uF460%f%k%F{black}%f "
 
