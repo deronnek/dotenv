@@ -7,6 +7,7 @@ set cursorline
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
+set rtp+=/usr/local/opt/fzf
 call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
@@ -18,8 +19,10 @@ Plugin 'altercation/vim-colors-solarized' " probably don't ever want to update t
 Plugin 'digitaltoad/vim-pug.git' " jade templating engine syntax highlighting
 Plugin 'vim-scripts/indentpython.vim'
 Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
-"Bundle 'Valloric/YouCompleteMe'
+Bundle 'Valloric/YouCompleteMe'
 Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'junegunn/fzf.vim'
+Plugin 'osyo-manga/vim-over' " OverCommandLine allows previewing of search/replace
 Plugin 'tmhedberg/SimpylFold' " proper folding for python files
 " Haven't decided if I like powerline or airline better.  powerline seems to
 " know about my git branch without install fugitive which is nice.
@@ -39,6 +42,10 @@ filetype plugin indent on    " required
 "set equalprg=clang-format
 "
 
+" Use fzf to open files
+nnoremap <C-p> :FZF<Cr>
+" use ripgrep + fzf to search within files
+nnoremap <C-g> :Rg<Cr>
 " See 
 " http://joshldavis.com/2014/04/05/vim-tab-madness-buffers-vs-tabs/ 
 " for more stuff you should consider for vim buffers/tabs
@@ -162,6 +169,8 @@ au BufEnter,BufNewFile,BufRead *.py set
 "    \ smarttab
     \ autoindent
     \ fileformat=unix
+
+autocmd BufEnter *.py, normal zR
 
 "\ foldmethod=indent
 "highlight BadWhitespace ctermbg=red guibg=darkred

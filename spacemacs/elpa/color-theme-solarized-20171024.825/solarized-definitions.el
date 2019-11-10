@@ -282,7 +282,7 @@ the \"Gen RGB\" column in solarized-definitions.el to improve them further."
                 (region (,@fg-base01 ,@bg-base03 ,@fmt-revbb)) ; Visual
                 (secondary-selection (,@bg-base02))
                 (shadow (,@fg-base01))
-                (trailing-whitespace (,@fmt-revr ,@fg-red))
+                (trailing-whitespace (,@fmt-revr ,@fg-base02))
                 (vertical-border (,@fg-base0))
                 ;; comint
                 (comint-highlight-prompt (,@fg-blue))
@@ -759,7 +759,7 @@ the \"Gen RGB\" column in solarized-definitions.el to improve them further."
                 (whitespace-space-after-tab (,@fg-cyan))
                 (whitespace-space-before-tab (,@fmt-bold ,@fg-red))
                 (whitespace-tab (,@fg-base02))
-                (whitespace-trailing (,@fmt-bold ,@fg-red ,@bg-base02))
+                (whitespace-trailing (,@fmt-bold ,@fg-base1 ,@bg-base03))
                 (whitespace-highlight-face (,@fg-red ,@bg-blue))
                 (whitespace-line (,@fg-magenta))
                 (whitespace-newline (:inherit shadow :slant normal))

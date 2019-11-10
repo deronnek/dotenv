@@ -5,6 +5,7 @@
 #export PATH="$HOME/bin:/anaconda3/bin:/usr/local/bin:/usr/local/sbin:$PATH:/Library/TeX/texbin"
 #export PATH="/usr/local/Cellar/emacs-plus/26.2/Emacs.app/Contents/MacOS:$PATH"
 typeset -U path
-path=(/usr/local/Cellar/emacs-plus/26.2/Emacs.app/Contents/MacOS /anaconda3/bin /bin /usr/local/bin $HOME/bin  /usr/local/sbin /Library/TeX/texbin $path )
+path=(/usr/local/Cellar/emacs-plus/26.2/Emacs.app/Contents/MacOS /bin /usr/local/bin $HOME/bin  /usr/local/sbin /Library/TeX/texbin $path )
+. /anaconda3/etc/profile.d/conda.sh
 #export PATH="$HOME/bin:/anaconda3/bin:/usr/local/bin:/usr/local/sbin:$PATH:/Library/TeX/texbin"
 #export PATH="/usr/local/Cellar/emacs-plus/26.2/Emacs.app/Contents/MacOS:$PATH"

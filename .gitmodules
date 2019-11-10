@@ -10,3 +10,6 @@
 [submodule "YouCompleteMe"]
 	path = YouCompleteMe
 	url = https://github.com/Valloric/YouCompleteMe.git
+[submodule "spacemacs/private/fzf-spacemacs-layer"]
+	path = spacemacs/private/fzf-spacemacs-layer
+	url = https://github.com/ashyisme/fzf-spacemacs-layer.git
