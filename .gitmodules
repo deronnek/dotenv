@@ -13,3 +13,6 @@
 [submodule "spacemacs/private/fzf-spacemacs-layer"]
 	path = spacemacs/private/fzf-spacemacs-layer
 	url = https://github.com/ashyisme/fzf-spacemacs-layer.git
+[submodule "tmux/tmux-weather"]
+	path = tmux/tmux-weather
+	url = https://github.com/deronnek/tmux-weather.git
