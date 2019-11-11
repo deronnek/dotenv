@@ -19,6 +19,7 @@ ln -s dotenv/dotvim/vimrc .vimrc
 ln -s dotenv/dotvim .vim
 ln -s dotenv/dircolors .dircolors
 ln -s dotenv/dotzsh/zshrc .zshrc
+ln -s dotenv/dotzsh/zshenv .zshenv
 ln -s dotenv/tmux/tmux.conf .tmux.conf
 ln -s ~/dotenv/gitbin ~/bin
 #ln -s dotenv/xmonad .xmonad
@@ -29,8 +30,7 @@ tic ~/foo
 # only if you're on an old ubuntu system
 #sudo apt-get install git zsh vim
 cd dotenv
-git submodule init
-git submodule update
+git submodule update --init --recursive
 ln -s ~/dotenv/oh-my-zsh ~/.oh-my-zsh
 ln -s ~/dotenv/dotzsh/aliases.zsh ~/.oh-my-zsh/custom/aliases.zsh
 mv .emacs.d .emacs.d_orig
@@ -46,5 +46,8 @@ ln -s ~/dotenv/dotspacemacs ~/.spacemacs
 #patch .vim/bundle/vim-colors-solarized/colors/solarized.vim dotenv/kdrsolarized.patch
 git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
 vim +PluginInstall +qall
-cd ~/dotenv/dotvim/bundle/YouCompleteMe
+cd ~/dotenv/YouCompleteMe
 ./install.py --clang-completer --tern-completer
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+cd ~/dotenv/tmux/tmux-weather
+npm install

@@ -44,6 +44,33 @@ degraded color mode to test the approximate color values for accuracy."
   :type 'boolean
   :group 'solarized)
 
+(defcustom solarized-height-plus-1 1.1
+  "Font size +1."
+  :type 'number
+  :group 'solarized)
+
+(defcustom solarized-height-plus-2 1.15
+  "Font size +2."
+  :type 'number
+  :group 'solarized)
+
+(defcustom solarized-height-plus-3 1.2
+  "Font size +3."
+  :type 'number
+  :group 'solarized)
+
+(defcustom solarized-height-plus-4 1.3
+  "Font size +4."
+  :type 'number
+  :group 'solarized)
+
+(defcustom solarized-scale-org-headlines nil
+  "Whether `org-mode' headlines should be scaled."
+  :type 'boolean
+  :group 'solarized)
+
+
+
 (defcustom solarized-contrast 'normal
   "Stick with normal! It's been carefully tested. Setting this option to high or
 low does use the same Solarized palette but simply shifts some values up or
@@ -255,7 +282,7 @@ the \"Gen RGB\" column in solarized-definitions.el to improve them further."
                 (region (,@fg-base01 ,@bg-base03 ,@fmt-revbb)) ; Visual
                 (secondary-selection (,@bg-base02))
                 (shadow (,@fg-base01))
-                (trailing-whitespace (,@fmt-revr ,@fg-red))
+                (trailing-whitespace (,@fmt-revr ,@fg-base02))
                 (vertical-border (,@fg-base0))
                 ;; comint
                 (comint-highlight-prompt (,@fg-blue))
@@ -353,7 +380,8 @@ the \"Gen RGB\" column in solarized-definitions.el to improve them further."
                 (font-lock-negation-char-face (,@fmt-none ,@fg-red))
                 (font-lock-other-type-face (,@fmt-ital ,@fg-blue))
                 (font-lock-regexp-grouping-construct (,@fmt-none ,@fg-orange))
-                (font-lock-special-keyword-face (,@fmt-none ,@fg-red)) ; Special
+                ;;(font-lock-special-keyword-face (,@fmt-none ,@fg-red)) ; Special
+                (font-lock-special-keyword-face (,@fmt-none,@fg-red)) ; Special
                 (font-lock-exit-face (,@fmt-none ,@fg-red))
                 (font-lock-other-emphasized-face (,@fmt-bldi ,@fg-violet))
                 (font-lock-regexp-grouping-backslash (,@fmt-none ,@fg-yellow))
@@ -365,10 +393,11 @@ the \"Gen RGB\" column in solarized-definitions.el to improve them further."
                 ;; org
                 (org-block-background (,@bg-base02))
                 (org-hide (,@fg-base03))
-                (org-todo (,@fmt-bold ,@fg-base03 ,@bg-red))
+                ;;(Org-todo (:scale 1.5, @fmt-bold ,@fg-base03 ,@bg-red))
+                (org-todo (@fmt-bold ,@fg-base03 ,@bg-red))
                 (org-done (,@fmt-bold ,@fg-green))
                 (org-todo-kwd-face (,@fmt-bold ,@fg-base03 ,@bg-red))
-                (org-done-kwd-face (,@fmt-bold ,@fg-green))
+                ;;(org-done-kwd-face (,@fmt-bold ,@fg-green))
                 (org-project-kwd-face (,@fg-violet ,@bg-base03))
                 (org-waiting-kwd-face (,@fg-orange ,@bg-base03))
                 (org-someday-kwd-face (,@fg-blue ,@bg-base03))
@@ -376,14 +405,37 @@ the \"Gen RGB\" column in solarized-definitions.el to improve them further."
                 (org-cancelled-kwd-face (,@fg-green ,@bg-base03))
                 (org-delegated-kwd-face (,@fg-cyan ,@bg-base03))
                 (org-default (:inherit default))
-                (org-level-1 (:inherit outline-1))
-                (org-level-2 (:inherit outline-2))
-                (org-level-3 (:inherit outline-3))
-                (org-level-4 (:inherit outline-4))
-                (org-level-5 (:inherit outline-5))
-                (org-level-6 (:inherit outline-6))
-                (org-level-7 (:inherit outline-7))
-                (org-level-8 (:inherit outline-8))
+                ;;(org-level-1 (:inherit outline-1))
+                ;;(org-level-2 (:inherit outline-2))
+                ;;(org-level-3 (:inherit outline-3))
+                ;;(org-level-4 (:inherit outline-4))
+                ;;(org-level-5 (:inherit outline-5))
+                ;;(org-level-6 (:inherit outline-6))
+                ;;(org-level-7 (:inherit outline-7))
+                ;;(org-level-8 (:inherit outline-8))
+                (org-level-1 (:inherit 'variable-pitch :foreground blue
+                                                 ,@(when solarized-scale-org-headlines
+                                                     (list :height solarized-height-plus-4))))
+                (org-level-2 (:inherit ,'variable-pitch :foreground cyan
+                                                 ,@(when solarized-scale-org-headlines
+                                                     (list :height solarized-height-plus-3))))
+                (org-level-3 (:inherit ,'variable-pitch :foreground yellow
+                                                 ,@(when solarized-scale-org-headlines
+                                                     (list :height solarized-height-plus-2))))
+                (org-level-4 (:inherit ,'variable-pitch :foreground red
+                                                 ,@(when solarized-scale-org-headlines
+                                                     (list :height solarized-height-plus-1))))
+                (org-level-5 (:inherit ,'variable-pitch
+                                                 :foreground magenta))
+                (org-level-6 (:inherit ,'variable-pitch
+                                                 :foreground orange))
+                (org-level-7 (:inherit ,'variable-pitch
+                                                 :foreground violet))
+                (org-level-8 (:inherit ,'variable-pitch
+                                                :foreground green))
+
+                ;;(org-todo-kwd-face (,@fmt-bold ,@fg-base03 ,@bg-red))
+
                 (org-special-keyword (,@fmt-ital ,@fg-base01))
                 (org-drawer (,@fmt-bold ,@fg-blue))
                 (org-column (,@fmt-revr ,@fg-cyan))
@@ -392,7 +444,8 @@ the \"Gen RGB\" column in solarized-definitions.el to improve them further."
                 (org-archived (,@fg-base01))
                 (org-link (,@fmt-undr ,@fg-violet))
                 (org-footnote (,@fmt-undr ,@fg-violet))
-                (org-ellipses (,@fg-yellow :strike-through t) )
+                ;;(org-ellipses (,@fg-yellow :strike-through t) )
+                (org-ellipsis ((t (:underline "#B0EEB0" :foreground "#00BB00"))))
                 (org-target (,@fmt-undr))
                 (org-date (,@fmt-undr ,@fg-violet))
                 (org-date-selected (,@fmt-revr ,@fg-red))
@@ -706,7 +759,7 @@ the \"Gen RGB\" column in solarized-definitions.el to improve them further."
                 (whitespace-space-after-tab (,@fg-cyan))
                 (whitespace-space-before-tab (,@fmt-bold ,@fg-red))
                 (whitespace-tab (,@fg-base02))
-                (whitespace-trailing (,@fmt-bold ,@fg-red ,@bg-base02))
+                (whitespace-trailing (,@fmt-bold ,@fg-base1 ,@bg-base03))
                 (whitespace-highlight-face (,@fg-red ,@bg-blue))
                 (whitespace-line (,@fg-magenta))
                 (whitespace-newline (:inherit shadow :slant normal))
@@ -777,6 +830,11 @@ the \"Gen RGB\" column in solarized-definitions.el to improve them further."
                 (magit-log-head-label-head (,@fg-violet))
                 (magit-process-ok (,@fg-green :inherit magit-section-title))
                 (magit-process-ng (,@fg-red :inherit magit-section-title))
+                ;; KDR conflict colors
+                (smerge-refined-added (,@fg-green ,@bg-base02))
+                (smerge-refined-removed (,@fg-red ,@bg-base02))
+                (smerge-mine (,@fg-violet ,@bg-base02))
+                (smerge-other (,@fg-blue ,@bg-base02))
                 ;; undo-tree
                 (undo-tree-visualizer-current-face (,@fg-orange))
                 (undo-tree-visualizer-default-face (:inherit shadow))
