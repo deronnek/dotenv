@@ -37,6 +37,7 @@ Plugin 'tmhedberg/SimpylFold' " proper folding for python files
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
+set rtp+=/usr/local/opt/fzf/plugin/fzf.vim
 
 "let g:airline_theme='solarized'
 " Blayne's c-code formatter (interferes with my usual binding for =)
