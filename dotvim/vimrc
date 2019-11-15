@@ -16,6 +16,7 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'altercation/vim-colors-solarized' " probably don't ever want to update this
 "Plugin 'pangloss/vim-javascript'
 Plugin 'digitaltoad/vim-pug.git' " jade templating engine syntax highlighting
+Plugin 'tmhedberg/matchit'
 Plugin 'vim-scripts/indentpython.vim'
 Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 "Bundle 'Valloric/YouCompleteMe'

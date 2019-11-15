@@ -31,6 +31,8 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
+     sql
+     markdown
      javascript
      typescript
      yaml
@@ -74,7 +76,7 @@ values."
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
    ;;dotspacemacs-additional-packages '(color-theme-solarized mic-paren outshine vimish-fold solarized-theme)
-   dotspacemacs-additional-packages '(color-theme-solarized mic-paren outshine vimish-fold)
+   dotspacemacs-additional-packages '(color-theme-solarized mic-paren outshine vimish-fold find-file-in-project)
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '(color-theme-solarized)
    ;; A list of packages that will not be installed and loaded.
@@ -401,14 +403,14 @@ you should place your code here."
   ;;  '(org-indent                ((t (:inherit (org-hide fixed-pitch))))))
 
 
-  ;;(set-face-background 'mmm-default-submode-face nil)
+  ;; (set-face-background 'mmm-default-submode-face nil) ;; breaks startup?
 
-  ;; (mmm-add-classes
-  ;;  '((python-sql
-  ;;     :submode sql-mode
-  ;;     :face mmm-code-submode-face
-  ;;     :front "#SQL"
-  ;;     :back "#/SQL")))
+  (mmm-add-classes
+   '((python-sql
+      :submode sql-mode
+      :face mmm-default-submode-face
+      :front "-- SQL"
+      :back "-- /SQL")))
 
   ;; (mmm-add-classes
   ;;  '((python-sql
@@ -417,8 +419,18 @@ you should place your code here."
   ;;     :front "# SQL\\(\n\\|\t\\)*\\(\[ -_A-Z0-9\]+\\)\\(\[ =\]\\)\\(\"\"\"\\|'''\\)"
   ;;     :back "\\(\"\"\"\\|'''\\)\\( \\|\t\\|\n\\)*\\# /SQL")))
 
-  ;; (mmm-add-mode-ext-class 'python-mode "*.py" 'python-sql)
+  (mmm-add-mode-ext-class 'python-mode "*.py" 'python-sql)
 
+
+  ;; Enable mmm-mode on python buffers with python hook
+  ;; Set face background to nil
+  ;; Run mmm-ify-by-class
+  (add-hook 'python-mode-hook
+            (lambda ()
+              (mmm-mode)
+              (set-face-background 'mmm-default-submode-face nil)))
+              ;;(mmm-ify-by-class)))
+            ;;            (add-hook 'after-save-hook 'my/org-render-latex-fragments nil 'make-the-hook-local)))
   ;; enable auto-completion when point is idle on a misspelled word
   ;;(setq-default dotspacemacs-configuration-layers
    ;;             '((spell-checking :variables enable-flyspell-auto-completion t)))
@@ -497,8 +509,31 @@ you should place your code here."
              (org-toggle-latex-fragment))
     (org-toggle-latex-fragment)))
 
+(defun my/python-sql-mode ()
+  "Function to enable python+sql syntax highlighting"
+  (interactive)
+  (progn
+    (mmm-mode)
+    (set-face-background 'mmm-default-submode-face nil)
+    (mmm-ify-by-class 'python-sql)
+    ))
+
 ;; Make SPC b i toggle latex fragment image
 (spacemacs/set-leader-keys "bi" 'org-toggle-latex-fragment)
+(spacemacs/set-leader-keys "bc" 'my/python-sql-mode)
+
+;; Enable mmm-mode on python buffers
+;; Set face background to nil
+;; Run mmm-ify-by-class
+;; (add-hook 'python-mode-hook
+;;           (lambda ()
+;;             (interactive)
+;;             (progn
+;;               (mmm-mode)
+;;               (set-face-background 'mmm-default-submode-face nil)
+;;               (mmm-ify-by-class 'python-sql)
+;;             )))
+;;(mmm-ify-by-class)))
 
 ;;(add-hook 'org-mode-hook
 ;;          (lambda ()
@@ -613,6 +648,7 @@ you should place your code here."
 
 ;; Make SPC-b-g switch background
 (spacemacs/set-leader-keys "bg" 'bgtoggle)
+(spacemacs/set-leader-keys "bf" 'find-file-in-project-at-point)
 
   ;; (flycheck-mode 0)  I don't really like flycheck so I've disabled it entirely
 

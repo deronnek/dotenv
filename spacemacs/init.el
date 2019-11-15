@@ -17,6 +17,7 @@
 (setq gc-cons-threshold 100000000)
 (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3");; fix forpackage not found
 
+(setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
 (defconst spacemacs-version         "0.200.10" "Spacemacs version.")
 (defconst spacemacs-emacs-min-version   "24.4" "Minimal version of Emacs.")
 
