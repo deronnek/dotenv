@@ -1,4 +1,4 @@
-#!/usr/bin/gawk -f
+#!/usr/bin/env gawk -f
 # SC == show columns
 # Show the column labels of a file. sc -F also works as expected
 {
