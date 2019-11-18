@@ -32,15 +32,18 @@ values."
    dotspacemacs-configuration-layers
    '(
      sql
+     company
+     lsp
      markdown
      javascript
      typescript
      yaml
+     ;;emoji
      ;;markdown
      csv
      vimscript
      syntax-checking
-     python
+     (python :variables python-backend 'lsp)
      ess
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
@@ -64,7 +67,7 @@ values."
      ;; (shell :variables
      ;;        shell-default-height 30
      ;;        shell-default-position 'bottom)
-     (spell-checking :variables enable-flyspell-auto-completion t)
+     (spell-checking :variables enable-flyspell-auto-completion nil)
      (syntax-checking :variables syntax-checking-enable-by-default nil)
      theming
      vim-powerline
@@ -321,7 +324,7 @@ It is called immediately after `dotspacemacs/init', before layer configuration
 executes.  This function is mostly useful for variables that need to be set
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
-  (setq ycmd-server-command '("python3" "~/dotenv/YouCompleteMe/third_party/ycmd/ycmd"))
+  (setq ycmd-server-command '("/usr/local/bin/python3" "/Users/kderonne/dotenv/YouCompleteMe/third_party/ycmd/ycmd"))
 )
 
 (defun dotspacemacs/user-config ()
@@ -332,7 +335,11 @@ This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
 
-
+  ;; Show complete path in mode-line
+  (spaceline-define-segment buffer-id
+    (if (buffer-file-name)
+        (abbreviate-file-name (buffer-file-name))
+      (powerline-buffer-id)))
   ;;(require 'outshine)
   ;;(add-hook 'outline-minor-mode-hook 'outshine-hook-function)
 ;; Left as an example of how to load files
@@ -436,7 +443,7 @@ you should place your code here."
    ;;             '((spell-checking :variables enable-flyspell-auto-completion t)))
 
   ;; GTD OrgMode implementation from here: https://emacs.cafe/emacs/orgmode/gtd/2017/06/30/orgmode-gtd.html
-(setq org-agenda-files '("~/notes/done.org" "~/notes/"))
+(setq org-agenda-files '("~/optum-notes/done.org" "~/optum-notes/"))
 ;;                         "~/gtd/gtd.org"
 ;;                         "~/gtd/tickler.org"))
 ;;(setq org-capture-templates '(("t" "Todo [inbox]" entry
@@ -696,10 +703,10 @@ you should place your code here."
    (quote
     (("t" "Todo item for KDR" entry
       (file+olp "~/optum-notes/todo.org" "Next")
-      "** TODO %?"))) t)
+      "** TODO %?"))))
  '(package-selected-packages
    (quote
-    (flyspell-popup markdown-mode+ lv transient solarized-theme tide json-mode js2-refactor company-tern web-beautify livid-mode skewer-mode simple-httpd json-snatcher json-reformat multiple-cursors js2-mode js-doc tern coffee-mode typescript-mode yaml-mode markdown-toc markdown-mode gh-md ox-gfm org-mime outshine outorg yafolding vimish-fold origami web-mode tagedit slim-mode scss-mode sass-mode pug-mode less-css-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data ess-smart-equals ess-R-data-view ctable ess julia-mode powerline spinner org-category-capture log4e gntp parent-mode helm-gtags gitignore-mode flx iedit anzu undo-tree highlight diminish ycmd pkg-info request-deferred let-alist request deferred epl bind-map packed auto-complete popup s theme-changer sunshine rase osx-location goto-chg yasnippet dash-functional async dash bind-key anaconda-mode smartparens evil flyspell-correct company helm helm-core avy alert projectile org-plus-contrib magit magit-popup git-commit ghub with-editor hydra pythonic f rainbow-mode rainbow-identifiers color-identifiers-mode vimrc-mode dactyl-mode csv-mode pos-tip flycheck ggtags color-theme highlight-parentheses yapfify ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline smeargle restart-emacs rainbow-delimiters pyvenv pytest pyenv-mode py-isort popwin pip-requirements persp-mode pcre2el paradox orgit org-projectile org-present org-pomodoro org-download org-bullets open-junk-file neotree move-text mic-paren magit-gitflow macrostep lorem-ipsum live-py-mode linum-relative link-hint info+ indent-guide hy-mode hungry-delete htmlize hl-todo highlight-numbers highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-pydoc helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-descbinds helm-company helm-c-yasnippet helm-ag google-translate golden-ratio gnuplot gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link fuzzy flyspell-correct-helm flycheck-ycmd flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu elisp-slime-nav dumb-jump define-word cython-mode company-ycmd company-statistics company-anaconda column-enforce-mode color-theme-solarized clean-aindent-mode auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell)))
+    (mmm-mode emoji-cheat-sheet-plus company-emoji flyspell-popup markdown-mode+ lv transient solarized-theme tide json-mode js2-refactor company-tern web-beautify livid-mode skewer-mode simple-httpd json-snatcher json-reformat multiple-cursors js2-mode js-doc tern coffee-mode typescript-mode yaml-mode markdown-toc markdown-mode gh-md ox-gfm org-mime outshine outorg yafolding vimish-fold origami web-mode tagedit slim-mode scss-mode sass-mode pug-mode less-css-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data ess-smart-equals ess-R-data-view ctable ess julia-mode powerline spinner org-category-capture log4e gntp parent-mode helm-gtags gitignore-mode flx iedit anzu undo-tree highlight diminish ycmd pkg-info request-deferred let-alist request deferred epl bind-map packed auto-complete popup s theme-changer sunshine rase osx-location goto-chg yasnippet dash-functional async dash bind-key anaconda-mode smartparens evil flyspell-correct company helm helm-core avy alert projectile org-plus-contrib magit magit-popup git-commit ghub with-editor hydra pythonic f rainbow-mode rainbow-identifiers color-identifiers-mode vimrc-mode dactyl-mode csv-mode pos-tip flycheck ggtags color-theme highlight-parentheses yapfify ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline smeargle restart-emacs rainbow-delimiters pyvenv pytest pyenv-mode py-isort popwin pip-requirements persp-mode pcre2el paradox orgit org-projectile org-present org-pomodoro org-download org-bullets open-junk-file neotree move-text mic-paren magit-gitflow macrostep lorem-ipsum live-py-mode linum-relative link-hint info+ indent-guide hy-mode hungry-delete htmlize hl-todo highlight-numbers highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-pydoc helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-descbinds helm-company helm-c-yasnippet helm-ag google-translate golden-ratio gnuplot gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link fuzzy flyspell-correct-helm flycheck-ycmd flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu elisp-slime-nav dumb-jump define-word cython-mode company-ycmd company-statistics company-anaconda column-enforce-mode color-theme-solarized clean-aindent-mode auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell)))
  '(paradox-github-token t)
  '(vc-follow-symlinks t))
 (custom-set-faces
