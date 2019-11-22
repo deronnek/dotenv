@@ -32,8 +32,8 @@ values."
    dotspacemacs-configuration-layers
    '(
      sql
-     company
-     lsp
+     ;;company
+     ;;lsp
      markdown
      javascript
      typescript
@@ -334,6 +334,10 @@ layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
+  ;; Doesn't seem to work as advertised--iterm2? osx modifiers?
+  ;; (setq ns-command-modifier 'super)
+  (setq org-hierarchical-todo-statistics nil)
+  (setq org-checkbox-hierarchical-statistics nil)
 
   ;; Show complete path in mode-line
   (spaceline-define-segment buffer-id
@@ -466,7 +470,7 @@ you should place your code here."
 (setq org-capture-templates
   (quote
    (("t" "Todo item for KDR2" entry
-     (file+olp "~/todo.org" "Next")
+     (file+olp "~/todo.org" "Intake")
      "** TODO %?"))))
 
 (setq org-enforce-todo-dependencies t)
