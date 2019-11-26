@@ -481,6 +481,45 @@ you should place your code here."
 
 ;;(setq org-todo-keywords '((sequence "TODO(t)" "HOLD(h)" "|" "DONE(d)" "CANCELLED(c)")))
 
+;; Solarized reference
+;; base03    #002b36
+;; base02    #073642
+;; base01    #586e75
+;; base00    #657b83
+;; base0     #839496
+;; base1     #93a1a1
+;; base2     #eee8d5
+;; base3     #fdf6e3
+;; yellow    #b58900
+;; orange    #cb4b16
+;; red       #dc322f
+;; magenta   #d33682
+;; violet    #6c71c4
+;; blue      #268bd2
+;; cyan      #2aa198
+;; green     #859900
+
+
+(setq hl-todo-keyword-faces
+      '(("HOLD" . "#b58900")
+       ("TODO" . "#dc322f")
+       ("NEXT" . "#dca3a3")
+       ("THEM" . "#dc8cc3")
+       ("PROG" . "#7cb8bb")
+       ("OKAY" . "#7cb8bb")
+       ("DONT" . "#5f7f5f")
+       ("FAIL" . "#8c5353")
+       ("DONE" . "#859900")
+       ("NOTE" . "#d0bf8f")
+       ("KLUDGE" . "#d0bf8f")
+       ("HACK" . "#d0bf8f")
+       ("TEMP" . "#d0bf8f")
+       ("FIXME" . "#cc9393")
+       ("XXX" . "#cc9393")
+       ("XXXX" . "#cc9393")
+       ("???" . "#cc9393")))
+
+
 
 
 
@@ -675,10 +714,11 @@ you should place your code here."
                                           (spacemacs/load-theme 'solarized)
                                           ))
 
-(setq sunshine-appid "8fd958ce8000ac8f740ddcf77d487eae")
+;; KDR's tmux weather plugin does this now
+;;(setq sunshine-appid "8fd958ce8000ac8f740ddcf77d487eae")
 ;;(setq sunshine-location "55435,USA")
-(setq sunshine-location "5037649")
-(setq sunshine-show-icons t)
+;;(setq sunshine-location "5037649")
+;;(setq sunshine-show-icons t)
 
 ;; These four were suggested as a fix for emacs hanging on file open
 ;;(setq history-length 100)
