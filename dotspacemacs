@@ -509,7 +509,7 @@ you should place your code here."
        ("OKAY" . "#7cb8bb")
        ("DONT" . "#5f7f5f")
        ("FAIL" . "#8c5353")
-       ("DONE" . "#859900")
+       ("DONE" . "#5f8700")
        ("NOTE" . "#d0bf8f")
        ("KLUDGE" . "#d0bf8f")
        ("HACK" . "#d0bf8f")
@@ -664,6 +664,8 @@ you should place your code here."
   (spacemacs/load-theme 'solarized)
   ;;(load-theme 'solarized-dark) ;; This is bbatsov's theme (without KDR's modifications)
 
+  (setq ycmd-extra-conf-whitelist '("~/work/pmi/code/*"))
+  (setq ycmd-filetype-whitelist '("python"))
 
   (setq ycmd-force-semantic-completion t)
   (add-hook 'c++-mode-hook 'ycmd-mode)
