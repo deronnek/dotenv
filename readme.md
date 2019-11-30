@@ -1,4 +1,4 @@
-Repository containing my development environment.
+# Repository containing my development environment.
 # Setup commands:
 git clone http://github.com/deronnek/dotenv.git
 #
@@ -51,3 +51,4 @@ cd ~/dotenv/YouCompleteMe
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 cd ~/dotenv/tmux/tmux-weather
 npm install
+# brew install coreutils
