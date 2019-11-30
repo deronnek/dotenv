@@ -41,7 +41,7 @@ This function should only modify configuration layer settings."
      csv
      vimscript
      syntax-checking
-     python
+     (python :variables python-backend 'anaconda)
      ess
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
@@ -167,7 +167,7 @@ It should only modify the values of Spacemacs settings."
    ;; If non nil output loading progress in `*Messages*' buffer. (default nil)
    dotspacemacs-verbose-loading nil
    ;; Configure mode line
-   dotspacemacs-mode-line-theme '(all-the-icons :separator slant)
+   ;; dotspacemacs-mode-line-theme '(all-the-icons :separator slant)
    ;; Specify the startup banner. Default value is `official', it displays
    ;; the official spacemacs logo. An integer value is the index of text
    ;; banner, `random' chooses a random text banner in `core/banners'
@@ -214,7 +214,7 @@ It should only modify the values of Spacemacs settings."
    ;; refer to the DOCUMENTATION.org for more info on how to create your own
    ;; spaceline theme. Value can be a symbol or list with additional properties.
    ;; (default '(spacemacs :separator wave :separator-scale 1.5))
-   ;;dotspacemacs-mode-line-theme '(all-the-icons :separator wave :separator-scale 1.5)
+   ;;dotspacemacs-mode-line-theme '(all-the-icons :separator arrow :separator-scale 1.5)
    dotspacemacs-mode-line-theme '(vim-powerline :separator wave :separator-scale 1.5)
 
    ;; If non-nil the cursor color matches the state color in GUI Emacs.
@@ -222,8 +222,8 @@ It should only modify the values of Spacemacs settings."
    dotspacemacs-colorize-cursor-according-to-state t
 
    ;; Default font or prioritized list of fonts.
-   dotspacemacs-default-font '("Source Code Pro"
-                               :size 10.0
+   dotspacemacs-default-font '("SauceCodePro Nerd Font Mono"
+                               :size 18.0
                                :weight normal
                                :width normal)
 
@@ -543,6 +543,10 @@ before packages are loaded."
   (setq tab-always-indent t)
   ;; Make = run M-q (like my :gqap alias in vim)
   (define-key evil-normal-state-map "=" 'fill-paragraph)
+
+  ;;----------------------------------------------------------------------------
+  ;; Spaceline customization
+  ;;----------------------------------------------------------------------------
 
   ;;----------------------------------------------------------------------------
   ;; Tab completion
