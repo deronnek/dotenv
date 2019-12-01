@@ -35,14 +35,14 @@ This function should only modify configuration layer settings."
    '(
      sql
      markdown
-     javascript
+     ;;javascript
      typescript
      yaml
      csv
-     vimscript
+     ;;vimscript
      syntax-checking
      (python :variables python-backend 'anaconda)
-     ess
+     ;;ess
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
@@ -51,7 +51,7 @@ This function should only modify configuration layer settings."
      helm
      html
      auto-completion
-     lsp
+     ;;lsp
      ;; better-defaults
      colors
      emacs-lisp
