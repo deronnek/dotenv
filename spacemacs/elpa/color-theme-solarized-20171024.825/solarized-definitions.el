@@ -834,7 +834,8 @@ the \"Gen RGB\" column in solarized-definitions.el to improve them further."
                 (smerge-refined-added (,@fg-green ,@bg-base02))
                 (smerge-refined-removed (,@fg-red ,@bg-base02))
                 (smerge-mine (,@fg-violet ,@bg-base02))
-                (smerge-other (,@fg-blue ,@bg-base02))
+                (smerge-other (,@fg-yellow ,@bg-base02))
+                (smerge-base (,@fg-blue ,@bg-base02))
                 ;; undo-tree
                 (undo-tree-visualizer-current-face (,@fg-orange))
                 (undo-tree-visualizer-default-face (:inherit shadow))
