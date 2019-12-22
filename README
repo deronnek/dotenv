@@ -45,6 +45,8 @@ ln -s ~/dotenv/dotspacemacs ~/.spacemacs
 # patched version now in git
 #patch .vim/bundle/vim-colors-solarized/colors/solarized.vim dotenv/kdrsolarized.patch
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+yes | ~/.fzf/install 
 vim +PluginInstall +qall
 cd ~/dotenv/YouCompleteMe
 ./install.py --clang-completer --tern-completer
@@ -52,3 +54,4 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:
 cd ~/dotenv/tmux/tmux-weather
 npm install
 # brew install coreutils
+# brew install fzf
