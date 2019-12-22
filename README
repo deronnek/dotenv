@@ -1,4 +1,4 @@
-Repository containing my development environment.
+# Repository containing my development environment.
 # Setup commands:
 git clone http://github.com/deronnek/dotenv.git
 #
@@ -44,10 +44,11 @@ ln -s ~/dotenv/spacemacs/vim-colors.el ~/.emacs.d/layers/+vim/vim-powerline/loca
 ln -s ~/dotenv/dotspacemacs ~/.spacemacs
 # patched version now in git
 #patch .vim/bundle/vim-colors-solarized/colors/solarized.vim dotenv/kdrsolarized.patch
-git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k
 vim +PluginInstall +qall
 cd ~/dotenv/YouCompleteMe
 ./install.py --clang-completer --tern-completer
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 cd ~/dotenv/tmux/tmux-weather
 npm install
+# brew install coreutils

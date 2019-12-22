@@ -100,5 +100,6 @@ export PERL_MM_USE_DEFAULT=1
 
 # added by Anaconda3 4.2.0 installer
 #export PATH="/data/anaconda/anaconda3/bin:$PATH"
+. /opt/anaconda3/etc/profile.d/conda.sh
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash

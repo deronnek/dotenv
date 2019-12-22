@@ -1,2 +1,2 @@
 #!/usr/bin/env node
-require('/Users/kderonne/tmux-weather/lib/tmux-weather')
+require('/Users/kderonne/dotenv/tmux/tmux-weather/lib/tmux-weather')
