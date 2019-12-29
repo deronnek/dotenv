@@ -16,3 +16,6 @@
 [submodule "tmux/tmux-weather"]
 	path = tmux/tmux-weather
 	url = https://github.com/deronnek/tmux-weather.git
+[submodule "icons-in-terminal"]
+	path = icons-in-terminal
+	url = https://github.com/sebastiencs/icons-in-terminal.git

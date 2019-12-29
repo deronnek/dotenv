@@ -32,11 +32,11 @@ This function should only modify configuration layer settings."
 
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(
+   '(javascript
      sql
      markdown
      ;;javascript
-     typescript
+     ;;typescript
      yaml
      csv
      ;;vimscript
@@ -49,7 +49,7 @@ This function should only modify configuration layer settings."
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
      helm
-     html
+     ;;html
      auto-completion
      ;;lsp
      ;; better-defaults
@@ -62,16 +62,14 @@ This function should only modify configuration layer settings."
      git
      ;; markdown
      gtags
-     (org :variables org-enable-github-support t)
+     (org :variables org-enable-github-support t
+                     org-want-todo-bindings t)
      ;; (shell :variables
      ;;        shell-default-height 30
      ;;        shell-default-position 'bottom)
      (spell-checking :variables enable-flyspell-auto-completion nil)
      (syntax-checking :variables syntax-checking-enable-by-default nil)
-     theming
-     ;;vim-powerline
-     ;;ycmd
-     ;; version-control
+     ;;theming
      )
 
    ;; List of additional packages that will be installed without being
@@ -214,7 +212,7 @@ It should only modify the values of Spacemacs settings."
    ;; refer to the DOCUMENTATION.org for more info on how to create your own
    ;; spaceline theme. Value can be a symbol or list with additional properties.
    ;; (default '(spacemacs :separator wave :separator-scale 1.5))
-   ;;dotspacemacs-mode-line-theme '(all-the-icons :separator arrow :separator-scale 1.5)
+   ;; dotspacemacs-mode-line-theme '(all-the-icons :separator arrow :separator-scale 1.5)
    dotspacemacs-mode-line-theme '(vim-powerline :separator wave :separator-scale 1.5)
 
    ;; If non-nil the cursor color matches the state color in GUI Emacs.
@@ -485,34 +483,38 @@ before packages are loaded."
   ;;----------------------------------------------------------------------------
   ;; Org mode
   ;;----------------------------------------------------------------------------
-  ;; Hide /.../ and *..* for italics and bold
-  (setq org-hide-emphasis-markers t)
-  ;; Change folding marker -- this messes up org bullets for some reason
-  ;; (add-hook 'org-mode-hook (setq org-ellipsis "▾"))
-  (setq org-ellipsis " ⤵")
-  (font-lock-add-keywords 'org-mode
-                          '(("^ *\\([-]\\) "
-                             (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
-  (setq org-agenda-files '("~/notes/done.org" "~/notes/"))
+  (with-eval-after-load 'org
+    ;; Hide /.../ and *..* for italics and bold
+    (setq org-hide-emphasis-markers t)
+    ;; Change folding marker -- this messes up org bullets for some reason
+    ;; (add-hook 'org-mode-hook (setq org-ellipsis "▾"))
+    (setq org-ellipsis " ⤵")
+    (font-lock-add-keywords 'org-mode
+                            '(("^ *\\([-]\\) "
+                              (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
+    (setq org-agenda-files '("~/work/optum-notes/done.org" "~/work/optum-notes/"))
 
-  (setq org-capture-templates
-        (quote
-         (("t" "Todo item for KDR2" entry
-           (file+olp "~/todo.org" "Next")
-           "** TODO %?"))))
+    (setq org-capture-templates
+          (quote
+          (("t" "Todo item for KDR2" entry
+            (file+olp "~/optum-notes/todo.org" "* Next")
+            "** TODO %?"))))
 
-  (setq org-enforce-todo-dependencies t)
-  (setq org-refile-targets '((nil :maxlevel . 5) (org-agenda-files :maxlevel . 5)))
+    (setq org-enforce-todo-dependencies t)
+    (setq org-refile-targets '((nil :maxlevel . 5) (org-agenda-files :maxlevel . 5)))
 
-  (require 'org)
-  (setq org-format-latex-options (plist-put org-format-latex-options :scale 2.0))
-  ;;(setq org-format-latex-options :scale 2.0)
+    ;;(require 'org)
+    (setq org-format-latex-options (plist-put org-format-latex-options :scale 2.0))
+    ;;(setq org-format-latex-options :scale 2.0)
 
-  (defun my/org-render-latex-fragments ()
-    (if (org--list-latex-overlays)
-        (progn (org-toggle-latex-fragment)
-               (org-toggle-latex-fragment))
-      (org-toggle-latex-fragment)))
+    (defun my/org-render-latex-fragments ()
+      (if (org--list-latex-overlays)
+          (progn (org-toggle-latex-fragment)
+                (org-toggle-latex-fragment))
+        (org-toggle-latex-fragment)))
+
+    (add-hook 'org-mode-hook 'hl-todo-mode)
+  )
 
   ;;----------------------------------------------------------------------------
   ;; mmm-mode + KDR's improvements (SQL in python strings)
@@ -543,6 +545,8 @@ before packages are loaded."
   (setq tab-always-indent t)
   ;; Make = run M-q (like my :gqap alias in vim)
   (define-key evil-normal-state-map "=" 'fill-paragraph)
+  ;; Set git smerge prefix to be not as awful (v instead of ^)
+  (setq smerge-command-prefix "\C-cv")
 
   ;;----------------------------------------------------------------------------
   ;; Spaceline customization
@@ -575,6 +579,54 @@ before packages are loaded."
                                           (set-frame-parameter frame 'background-mode 'dark)
                                           (spacemacs/load-theme 'solarized)
                                           ))
+
+
+;;   SOLARIZED HEX     16/8 TERMCOL  XTERM/HEX   L*A*B      RGB         HSB
+;; --------- ------- ---- -------  ----------- ---------- ----------- -----------
+;; base03    #002b36  8/4 brblack  234 #1c1c1c 15 -12 -12   0  43  54 193 100  21
+;; base02    #073642  0/4 black    235 #262626 20 -12 -12   7  54  66 192  90  26
+;; base01    #586e75 10/7 brgreen  240 #585858 45 -07 -07  88 110 117 194  25  46
+;; base00    #657b83 11/7 bryellow 241 #626262 50 -07 -07 101 123 131 195  23  51
+;; base0     #839496 12/6 brblue   244 #808080 60 -06 -03 131 148 150 186  13  59
+;; base1     #93a1a1 14/4 brcyan   245 #8a8a8a 65 -05 -02 147 161 161 180   9  63
+;; base2     #eee8d5  7/7 white    254 #e4e4e4 92 -00  10 238 232 213  44  11  93
+;; base3     #fdf6e3 15/7 brwhite  230 #ffffd7 97  00  10 253 246 227  44  10  99
+;; yellow    #b58900  3/3 yellow   136 #af8700 60  10  65 181 137   0  45 100  71
+;; orange    #cb4b16  9/3 brred    166 #d75f00 50  50  55 203  75  22  18  89  80
+;; red       #dc322f  1/1 red      160 #d70000 50  65  45 220  50  47   1  79  86
+;; magenta   #d33682  5/5 magenta  125 #af005f 50  65 -05 211  54 130 331  74  83
+;; violet    #6c71c4 13/5 brmagenta 61 #5f5faf 50  15 -45 108 113 196 237  45  77
+;; blue      #268bd2  4/4 blue      33 #0087ff 55 -10 -45  38 139 210 205  82  82
+;; cyan      #2aa198  6/6 cyan      37 #00afaf 60 -35 -05  42 161 152 175  74  63
+;; green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
+
+  (setq hl-todo-keyword-faces
+        '(("HOLD" . "#b58900")
+          ("TODO" . "#dc322f")
+          ("NEXT" . "#dca3a3")
+          ("THEM" . "#dc8cc3")
+          ("PROG" . "#7cb8bb")
+          ("OKAY" . "#7cb8bb")
+          ("DONT" . "#5f7f5f")
+          ("FAIL" . "#8c5353")
+          ("DONE" . "#859900")
+          ("NOTE" . "#af005f")
+          ("OUTDATED" . "#d33682")
+          ("KLUDGE" . "#d0bf8f")
+          ("HACK" . "#d0bf8f")
+          ("TEMP" . "#d0bf8f")
+          ("FIXME" . "#cc9393")
+          ("XXX" . "#cc9393")
+          ("YELLOW"  . "#b58900")
+          ("ORANGE"  . "#cb4b16")
+          ("RED"     . "#dc322f")
+          ("MAGENTA" . "#d33682")
+          ("VIOLET"  . "#6c71c4")
+          ("BLUE"    . "#268bd2")
+          ("CYAN"    . "#2aa198")
+          ("GREEN"   . "#859900")
+          ("???" . "#cc9393")))
+
   (defun bgtoggle()
     "Toggle light/dark background"
     (interactive)
@@ -655,10 +707,10 @@ This function is called at the very end of Spacemacs initialization."
    (quote
     (("t" "Todo item for KDR" entry
       (file+olp "~/optum-notes/todo.org" "Next")
-      "** TODO %?"))) t)
+      "** TODO %?"))))
  '(package-selected-packages
    (quote
-    (lsp-ui lsp-treemacs lsp-python-ms helm-lsp company-lsp lsp-mode sql-indent find-file-in-project ivy flyspell-popup markdown-mode+ lv transient solarized-theme tide json-mode js2-refactor company-tern web-beautify livid-mode skewer-mode simple-httpd json-snatcher json-reformat multiple-cursors js2-mode js-doc tern coffee-mode typescript-mode yaml-mode markdown-toc markdown-mode gh-md ox-gfm org-mime outshine outorg yafolding vimish-fold origami web-mode tagedit slim-mode scss-mode sass-mode pug-mode less-css-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data ess-smart-equals ess-R-data-view ctable ess julia-mode powerline spinner org-category-capture log4e gntp parent-mode helm-gtags gitignore-mode flx iedit anzu undo-tree highlight diminish ycmd pkg-info request-deferred let-alist request deferred epl bind-map packed auto-complete popup s theme-changer sunshine rase osx-location goto-chg yasnippet dash-functional async dash bind-key anaconda-mode smartparens evil flyspell-correct company helm helm-core avy alert projectile org-plus-contrib magit magit-popup git-commit ghub with-editor hydra pythonic f rainbow-mode rainbow-identifiers color-identifiers-mode vimrc-mode dactyl-mode csv-mode pos-tip flycheck ggtags color-theme highlight-parentheses yapfify ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline smeargle restart-emacs rainbow-delimiters pyvenv pytest pyenv-mode py-isort popwin pip-requirements persp-mode pcre2el paradox orgit org-projectile org-present org-pomodoro org-download org-bullets open-junk-file neotree move-text mic-paren magit-gitflow macrostep lorem-ipsum live-py-mode linum-relative link-hint info+ indent-guide hy-mode hungry-delete htmlize hl-todo highlight-numbers highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-pydoc helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-descbinds helm-company helm-c-yasnippet helm-ag google-translate golden-ratio gnuplot gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link fuzzy flyspell-correct-helm flycheck-ycmd flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu elisp-slime-nav dumb-jump define-word cython-mode company-ycmd company-statistics company-anaconda column-enforce-mode color-theme-solarized clean-aindent-mode auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell)))
+    (prettier-js nodejs-repl import-js grizzl impatient-mode dap-mode bui tree-mode lsp-mode counsel-gtags counsel swiper add-node-modules-path sql-indent find-file-in-project ivy flyspell-popup markdown-mode+ lv transient solarized-theme tide json-mode js2-refactor company-tern web-beautify livid-mode skewer-mode simple-httpd json-snatcher json-reformat multiple-cursors js2-mode js-doc tern coffee-mode typescript-mode yaml-mode markdown-toc markdown-mode gh-md ox-gfm org-mime outshine outorg yafolding vimish-fold origami web-mode tagedit slim-mode scss-mode sass-mode pug-mode less-css-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data ess-smart-equals ess-R-data-view ctable ess julia-mode powerline spinner org-category-capture log4e gntp parent-mode helm-gtags gitignore-mode flx iedit anzu undo-tree highlight diminish ycmd pkg-info request-deferred let-alist request deferred epl bind-map packed auto-complete popup s theme-changer sunshine rase osx-location goto-chg yasnippet dash-functional async dash bind-key anaconda-mode smartparens evil flyspell-correct company helm helm-core avy alert projectile org-plus-contrib magit magit-popup git-commit ghub with-editor hydra pythonic f rainbow-mode rainbow-identifiers color-identifiers-mode vimrc-mode dactyl-mode csv-mode pos-tip flycheck ggtags color-theme highlight-parentheses yapfify ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline smeargle restart-emacs rainbow-delimiters pyvenv pytest pyenv-mode py-isort popwin pip-requirements persp-mode pcre2el paradox orgit org-projectile org-present org-pomodoro org-download org-bullets open-junk-file neotree move-text mic-paren magit-gitflow macrostep lorem-ipsum live-py-mode linum-relative link-hint info+ indent-guide hy-mode hungry-delete htmlize hl-todo highlight-numbers highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-pydoc helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-descbinds helm-company helm-c-yasnippet helm-ag google-translate golden-ratio gnuplot gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link fuzzy flyspell-correct-helm flycheck-ycmd flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu elisp-slime-nav dumb-jump define-word cython-mode company-ycmd company-statistics company-anaconda column-enforce-mode color-theme-solarized clean-aindent-mode auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell)))
  '(paradox-github-token t)
  '(vc-follow-symlinks t))
 (custom-set-faces
