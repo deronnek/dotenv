@@ -360,14 +360,15 @@ the \"Gen RGB\" column in solarized-definitions.el to improve them further."
                 ;; font-lock
                 (font-lock-builtin-face (,@fmt-none ,@fg-green)) ; Statement
                 (font-lock-comment-face (,@fmt-ital ,@fg-base01)) ; Comment
-                (font-lock-constant-face (,@fmt-none ,@fg-cyan)) ; Constant
+                (font-lock-constant-face (,@fmt-none ,@fg-blue)) ; Constant
                 (font-lock-function-name-face ; Identifier
                  (,@fmt-none ,@fg-green))
-                (font-lock-keyword-face (,@fmt-none ,@fg-yellow)) ; Statement
-                (font-lock-string-face (,@fmt-none ,@fg-violet)) ; Constant
+                (font-lock-keyword-face (,@fmt-none ,@fg-yellow)) ; Keyword
+                (font-lock-string-face (,@fmt-none ,@fg-violet)) ; String
                 (font-lock-type-face (,@fmt-none ,@fg-orange)) ; Type
                 (font-lock-variable-name-face ; Identifier
-                 (,@fmt-none ,@fg-base0))
+                ; (,@fmt-none ,@fg-base0))
+                (,@fmt-none ,@fg-cyan))
                 (font-lock-warning-face (,@fmt-bold ,@fg-red)) ; Error
                 (font-lock-doc-face (,@fmt-ital ,@fg-base01)) ; Comment
                 (font-lock-doc-string-face ; Comment (XEmacs-only)
