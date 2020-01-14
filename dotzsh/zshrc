@@ -333,8 +333,17 @@ rehash
 typeset -g POWERLEVEL9K_PROMPT_CHAR_{OK,ERROR}_VIINS_CONTENT_EXPANSION=''
 #typeset -g POWERLEVEL9K_VISUAL_IDENTIFIER_EXPANSION='${P9K_VISUAL_IDENTIFIER}'
 #
-alias tesdiff = "vimdiff <(json_pp --json_opt=canonical,pretty,indent < ../test/new_output.json) <(json_pp --json_opt=canonical,pretty,indent < ../test/test_1pid_2pltdays_no_cgm_data_end2end.json)"
+#alias tesdiff='vimdiff <(json_pp --json_opt=canonical,pretty,indent < ../test/new_output.json) <(json_pp --json_opt=canonical,pretty,indent < ../test/test_1pid_2pltdays_no_cgm_data_end2end.json)'
 
+function jkdiff () {
+    vimdiff <(json_pp --json_opt=canonical,pretty,indent < $1) <(json_pp --json_opt=canonical,pretty,indent < $2)
+}
+
+function jdiff () {
+    vimdiff <(python -c "import json, sys, collections; print(json.dumps(json.loads(sys.stdin.read(), object_pairs_hook=collections.OrderedDict), indent=4))" < $1) <(python -c "import json, sys, collections; print(json.dumps(json.loads(sys.stdin.read(), object_pairs_hook=collections.OrderedDict), indent=4))" < $2)
+
+}
+  
 # Separator between same-color segments on the left.
 # typeset -g POWERLEVEL9K_LEFT_SUBSEGMENT_SEPARATOR='\uE0B5'
 # # Separator between same-color segments on the right.
