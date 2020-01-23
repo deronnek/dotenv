@@ -360,13 +360,13 @@ the \"Gen RGB\" column in solarized-definitions.el to improve them further."
                 ;; font-lock
                 (font-lock-builtin-face (,@fmt-none ,@fg-green)) ; Statement
                 (font-lock-comment-face (,@fmt-ital ,@fg-base01)) ; Comment
-                (font-lock-constant-face (,@fmt-none ,@fg-blue)) ; Constant
+                (font-lock-constant-face (,@fmt-none ,@fg-magenta)) ; Constant
                 (font-lock-function-name-face ; Identifier
                  (,@fmt-none ,@fg-green))
                 (font-lock-keyword-face (,@fmt-none ,@fg-yellow)) ; Keyword
                 (font-lock-string-face (,@fmt-none ,@fg-violet)) ; String
                 (font-lock-type-face (,@fmt-none ,@fg-orange)) ; Type
-                (font-lock-variable-name-face ; Identifier
+                (font-lock-variable-name-face ; Identifier (variable)
                 ; (,@fmt-none ,@fg-base0))
                 (,@fmt-none ,@fg-cyan))
                 (font-lock-warning-face (,@fmt-bold ,@fg-red)) ; Error

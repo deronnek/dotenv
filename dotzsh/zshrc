@@ -341,9 +341,11 @@ function jkdiff () {
 
 function jdiff () {
     vimdiff <(python -c "import json, sys, collections; print(json.dumps(json.loads(sys.stdin.read(), object_pairs_hook=collections.OrderedDict), indent=4))" < $1) <(python -c "import json, sys, collections; print(json.dumps(json.loads(sys.stdin.read(), object_pairs_hook=collections.OrderedDict), indent=4))" < $2)
-
 }
   
+function jbdiff () {
+    vimdiff <(json_pp --json_opt=canonical,pretty,indent < $1 |grep -a -v batch | grep -a -v date) <(json_pp --json_opt=canonical,pretty,indent < $2 | grep -a -v batch | grep -a -v date)
+}
 # Separator between same-color segments on the left.
 # typeset -g POWERLEVEL9K_LEFT_SUBSEGMENT_SEPARATOR='\uE0B5'
 # # Separator between same-color segments on the right.
