@@ -22,8 +22,10 @@ ln -s ~/dotenv/gitbin ~/bin
 
 echo "xterm-16color|xterm with 16 colors, colors#16, use=xterm," >> ~/foo
 tic ~/foo
-# only if you're on an old ubuntu system
-#sudo apt-get install git zsh vim
+
+# Install packages
+sudo apt-get install nodejs-dev node-gyp libssl1.0-dev
+sudo apt-get -y install git zsh vim npm
 cd dotenv
 git submodule update --init --recursive
 ln -s ~/dotenv/oh-my-zsh ~/.oh-my-zsh
@@ -37,14 +39,16 @@ ln -s ~/dotenv/spacemacs/elpa/color-theme-solarized-20171024.825 ~/.emacs.d/elpa
 rm ~/.emacs.d/layers/+vim/vim-powerline/local/vim-powerline/vim-colors.el
 ln -s ~/dotenv/spacemacs/vim-colors.el ~/.emacs.d/layers/+vim/vim-powerline/local/vim-powerline/vim-colors.el
 ln -s ~/dotenv/dotspacemacs ~/.spacemacs
-git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 yes | ~/.fzf/install 
 vim +PluginInstall +qall
 cd ~/dotenv/YouCompleteMe
 ./install.py --clang-completer --tern-completer
+# Need to be running zsh from this point onward
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/powerlevel10k
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 cd ~/dotenv/tmux/tmux-weather
+
 npm install
 # Only if you're on osx
 # brew install coreutils
