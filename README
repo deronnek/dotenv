@@ -42,6 +42,10 @@ ln -s ~/dotenv/dotspacemacs ~/.spacemacs
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 yes | ~/.fzf/install 
 vim +PluginInstall +qall
+# Compile for vim
+cd ~/.vim/bundle/YouCompleteMe
+./install.py --clang-completer --tern-completer
+# Also Compile for emacs
 cd ~/dotenv/YouCompleteMe
 ./install.py --clang-completer --tern-completer
 # Need to be running zsh from this point onward
