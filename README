@@ -19,6 +19,7 @@ ln -s ~/dotenv/dotzsh/zshrc ~/.zshrc
 ln -s ~/dotenv/dotzsh/zshenv ~/.zshenv
 ln -s ~/dotenv/tmux/tmux.conf ~/.tmux.conf
 ln -s ~/dotenv/gitbin ~/bin
+ln -s ~/dotenv/dotzsh/p10k.zsh ~/.p10k.zsh
 
 echo "xterm-16color|xterm with 16 colors, colors#16, use=xterm," >> ~/foo
 tic ~/foo
