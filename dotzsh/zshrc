@@ -4,7 +4,6 @@
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
-
 # Path to your oh-my-zsh installation.
 #export TERM="xterm-256color"
 #export TERM="xterm"
@@ -285,7 +284,7 @@ export PATH=/anaconda3/bin:$PATH
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
  
-#export LC_ALL=C
+export LC_ALL=en_US.UTF-8
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
