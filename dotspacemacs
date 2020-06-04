@@ -39,6 +39,7 @@ This function should only modify configuration layer settings."
      ;;typescript
      yaml
      csv
+     (plantuml :variables plantuml-jar-path "~/local/plantUml.jar")
      ;;vimscript
      syntax-checking
      (python :variables python-backend 'anaconda)
@@ -77,7 +78,7 @@ This function should only modify configuration layer settings."
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
    ;;dotspacemacs-additional-packages '(color-theme-solarized mic-paren outshine vimish-fold solarized-theme)
-   dotspacemacs-additional-packages '(color-theme-solarized mic-paren outshine vimish-fold find-file-in-project)
+   dotspacemacs-additional-packages '(color-theme-modern color-theme-solarized mic-paren outshine vimish-fold find-file-in-project)
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '(color-theme-solarized)
    ;; A list of packages that will not be installed and loaded.
@@ -154,7 +155,7 @@ It should only modify the values of Spacemacs settings."
    ;; If non-nil, a form that evaluates to a package directory. For example, to
    ;; use different package directories for different Emacs versions, set this
    ;; to `emacs-version'.
-   dotspacemacs-elpa-subdirectory nil
+   dotspacemacs-elpa-subdirectory 'emacs-version
    ;; One of `vim', `emacs' or `hybrid'.
    ;; `hybrid' is like `vim' except that `insert state' is replaced by the
    ;; `hybrid state' with `emacs' key bindings. The value can also be a list
@@ -202,6 +203,7 @@ It should only modify the values of Spacemacs settings."
    ;; Press `SPC T n' to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
    dotspacemacs-themes '(solarized
+                         solarized-dark
                          spacemacs-dark
                          spacemacs-light)
 
@@ -309,7 +311,7 @@ It should only modify the values of Spacemacs settings."
    ;; If non-nil a progress bar is displayed when spacemacs is loading. This
    ;; may increase the boot time on some systems and emacs builds, set it to
    ;; nil to boost the loading time. (default t)
-   dotspacemacs-loading-progress-bar t
+   dotspacemacs-loading-progress-bar nil 
 
    ;; If non-nil the frame is fullscreen when Emacs starts up. (default nil)
    ;; (Emacs 24.4+ only)
@@ -492,12 +494,12 @@ before packages are loaded."
     (font-lock-add-keywords 'org-mode
                             '(("^ *\\([-]\\) "
                               (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
-    (setq org-agenda-files '("~/work/optum-notes/done.org" "~/work/optum-notes/"))
+    (setq org-agenda-files '("~/work-local/notes/done.org" "~/work-local/notes/"))
 
     (setq org-capture-templates
           (quote
           (("t" "Todo item for KDR2" entry
-            (file+olp "~/optum-notes/todo.org" "* Next")
+            (file+olp "~/work-local/notes/todo.org" "* Intake")
             "** TODO %?"))))
 
     (setq org-enforce-todo-dependencies t)
@@ -547,6 +549,8 @@ before packages are loaded."
   (define-key evil-normal-state-map "=" 'fill-paragraph)
   ;; Set git smerge prefix to be not as awful (v instead of ^)
   (setq smerge-command-prefix "\C-cv")
+  ;; Allow local compilation of plantUml diagrams
+  (setq plantuml-default-exec-mode 'jar)
 
   ;;----------------------------------------------------------------------------
   ;; Spaceline customization
@@ -600,32 +604,32 @@ before packages are loaded."
 ;; cyan      #2aa198  6/6 cyan      37 #00afaf 60 -35 -05  42 161 152 175  74  63
 ;; green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
 
-  (setq hl-todo-keyword-faces
-        '(("HOLD" . "#b58900")
-          ("TODO" . "#dc322f")
-          ("NEXT" . "#dca3a3")
-          ("THEM" . "#dc8cc3")
-          ("PROG" . "#7cb8bb")
-          ("OKAY" . "#7cb8bb")
-          ("DONT" . "#5f7f5f")
-          ("FAIL" . "#8c5353")
-          ("DONE" . "#859900")
-          ("NOTE" . "#af005f")
-          ("OUTDATED" . "#d33682")
-          ("KLUDGE" . "#d0bf8f")
-          ("HACK" . "#d0bf8f")
-          ("TEMP" . "#d0bf8f")
-          ("FIXME" . "#cc9393")
-          ("XXX" . "#cc9393")
-          ("YELLOW"  . "#b58900")
-          ("ORANGE"  . "#cb4b16")
-          ("RED"     . "#dc322f")
-          ("MAGENTA" . "#d33682")
-          ("VIOLET"  . "#6c71c4")
-          ("BLUE"    . "#268bd2")
-          ("CYAN"    . "#2aa198")
-          ("GREEN"   . "#859900")
-          ("???" . "#cc9393")))
+  ;; (setq hl-todo-keyword-faces
+  ;;       '(("HOLD" . "#b58900")
+  ;;         ("TODO" . "#dc322f")
+  ;;         ("NEXT" . "#dca3a3")
+  ;;         ("THEM" . "#dc8cc3")
+  ;;         ("PROG" . "#7cb8bb")
+  ;;         ("OKAY" . "#7cb8bb")
+  ;;         ("DONT" . "#5f7f5f")
+  ;;         ("FAIL" . "#8c5353")
+  ;;         ("DONE" . "#859900")
+  ;;         ("NOTE" . "#af005f")
+  ;;         ("OUTDATED" . "#d33682")
+  ;;         ("KLUDGE" . "#d0bf8f")
+  ;;         ("HACK" . "#d0bf8f")
+  ;;         ("TEMP" . "#d0bf8f")
+  ;;         ("FIXME" . "#cc9393")
+  ;;         ("XXX" . "#cc9393")
+  ;;         ("YELLOW"  . "#b58900")
+  ;;         ("ORANGE"  . "#cb4b16")
+  ;;         ("RED"     . "#dc322f")
+  ;;         ("MAGENTA" . "#d33682")
+  ;;         ("VIOLET"  . "#6c71c4")
+  ;;         ("BLUE"    . "#268bd2")
+  ;;         ("CYAN"    . "#2aa198")
+  ;;         ("GREEN"   . "#859900")
+  ;;         ("???" . "#cc9393")))
 
   (defun bgtoggle()
     "Toggle light/dark background"
@@ -656,7 +660,6 @@ before packages are loaded."
 
 ;; I don't really use the emacs server and probably won't with the spacemacs dev startup speed
 ;; (server-start)
-
 )
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
@@ -671,11 +674,12 @@ This function is called at the very end of Spacemacs initialization."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(ansi-color-names-vector
-   ["#080808" "#d70000" "#67b11d" "#875f00" "#268bd2" "#af00df" "#00ffff" "#b2b2b2"])
+   ["#0a0814" "#f2241f" "#67b11d" "#b1951d" "#4f97d7" "#a31db1" "#28def0" "#b2b2b2"])
  '(custom-safe-themes
    (quote
     ("fa2b58bb98b62c3b8cf3b6f02f058ef7827a8e497125de0254f56e373abee088" "bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" default)))
  '(evil-want-Y-yank-to-eol nil)
+ '(org-agenda-files nil)
  '(org-capture-templates
    (quote
     (("t" "Todo item for KDR" entry
@@ -683,8 +687,9 @@ This function is called at the very end of Spacemacs initialization."
       "** TODO %?"))) t)
  '(package-selected-packages
    (quote
-    (ansi package-build shut-up git commander prettier-js nodejs-repl import-js grizzl impatient-mode dap-mode bui tree-mode lsp-mode counsel-gtags counsel swiper add-node-modules-path sql-indent find-file-in-project ivy flyspell-popup markdown-mode+ lv transient solarized-theme tide json-mode js2-refactor company-tern web-beautify livid-mode skewer-mode simple-httpd json-snatcher json-reformat multiple-cursors js2-mode js-doc tern coffee-mode typescript-mode yaml-mode markdown-toc markdown-mode gh-md ox-gfm org-mime outshine outorg yafolding vimish-fold origami web-mode tagedit slim-mode scss-mode sass-mode pug-mode less-css-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data ess-smart-equals ess-R-data-view ctable ess julia-mode powerline spinner org-category-capture log4e gntp parent-mode helm-gtags gitignore-mode flx iedit anzu undo-tree highlight diminish ycmd pkg-info request-deferred let-alist request deferred epl bind-map packed auto-complete popup s theme-changer sunshine rase osx-location goto-chg yasnippet dash-functional async dash bind-key anaconda-mode smartparens evil flyspell-correct company helm helm-core avy alert projectile org-plus-contrib magit magit-popup git-commit ghub with-editor hydra pythonic f rainbow-mode rainbow-identifiers color-identifiers-mode vimrc-mode dactyl-mode csv-mode pos-tip flycheck ggtags color-theme highlight-parentheses yapfify ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline smeargle restart-emacs rainbow-delimiters pyvenv pytest pyenv-mode py-isort popwin pip-requirements persp-mode pcre2el paradox orgit org-projectile org-present org-pomodoro org-download org-bullets open-junk-file neotree move-text mic-paren magit-gitflow macrostep lorem-ipsum live-py-mode linum-relative link-hint info+ indent-guide hy-mode hungry-delete htmlize hl-todo highlight-numbers highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-pydoc helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-descbinds helm-company helm-c-yasnippet helm-ag google-translate golden-ratio gnuplot gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link fuzzy flyspell-correct-helm flycheck-ycmd flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu elisp-slime-nav dumb-jump define-word cython-mode company-ycmd company-statistics company-anaconda column-enforce-mode color-theme-solarized clean-aindent-mode auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell)))
+    (plantuml-mode color-theme-modern web-beautify sql-indent livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc find-file-in-project ivy company-tern tern coffee-mode solarized-theme yapfify yaml-mode ws-butler winum which-key web-mode volatile-highlights vimrc-mode vimish-fold vi-tilde-fringe uuidgen use-package toc-org tagedit spaceline smeargle slim-mode scss-mode sass-mode restart-emacs rainbow-mode rainbow-identifiers rainbow-delimiters pyvenv pytest pyenv-mode py-isort pug-mode popwin pip-requirements persp-mode pcre2el paradox ox-gfm outshine orgit org-present org-pomodoro org-mime org-download org-bullets open-junk-file neotree move-text mmm-mode mic-paren markdown-toc magit-gitflow macrostep lorem-ipsum live-py-mode linum-relative link-hint less-css-mode indent-guide hy-mode hungry-delete htmlize hl-todo highlight-numbers highlight-indentation helm-themes helm-swoop helm-pydoc helm-projectile helm-mode-manager helm-make helm-gtags helm-gitignore helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag google-translate golden-ratio gnuplot gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe git-gutter-fringe+ gh-md ggtags fuzzy flyspell-correct-helm flycheck-ycmd flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu emmet-mode elisp-slime-nav dumb-jump diminish diff-hl define-word dactyl-mode cython-mode csv-mode company-ycmd company-web company-statistics company-anaconda column-enforce-mode color-theme-solarized color-theme-ocean color-identifiers-mode clean-aindent-mode auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell)))
  '(paradox-github-token t)
+ '(pdf-view-midnight-colors (quote ("#b2b2b2" . "#262626")))
  '(vc-follow-symlinks t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
