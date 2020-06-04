@@ -30,6 +30,7 @@ alias .....='cd ../../../../..'
 #alias tmux="TERMINFO=~/.terminfo/x/xterm-16color TERM=xterm-16color tmux -u -2"
 # htop is much better than top
 alias top="htop"
+alias tgr="~/bin/tmux-layout-dwindle"
 #alias python="python3"
 #alias pip="pip3"
 
