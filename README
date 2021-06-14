@@ -25,8 +25,8 @@ echo "xterm-16color|xterm with 16 colors, colors#16, use=xterm," >> ~/foo
 tic ~/foo
 
 # Install packages
-sudo apt-get install nodejs-dev node-gyp libssl1.0-dev
-sudo apt-get -y install git zsh vim npm
+#sudo apt-get install nodejs-dev node-gyp libssl1.0-dev
+#sudo apt-get -y install git zsh vim npm
 cd dotenv
 git submodule update --init --recursive
 ln -s ~/dotenv/oh-my-zsh ~/.oh-my-zsh
@@ -53,8 +53,6 @@ cd ~/dotenv/YouCompleteMe
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/powerlevel10k
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 cd ~/dotenv/tmux/tmux-weather
-
-npm install
 # Only if you're on osx
-# brew install coreutils
-# brew install fzf
+# brew install coreutils fzf npm tmux
+npm install

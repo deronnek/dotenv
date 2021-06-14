@@ -32,17 +32,23 @@ This function should only modify configuration layer settings."
 
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(javascript
+   '(nginx
+     html
+     ansible
+     typescript
+     javascript
+     react
+     prettier
      sql
      markdown
-     ;;javascript
-     ;;typescript
      yaml
      csv
+     docker
+     (terraform :variables terraform-auto-format-on-save t)
      (plantuml :variables plantuml-jar-path "~/local/plantUml.jar")
      ;;vimscript
-     syntax-checking
-     (python :variables python-backend 'anaconda)
+     (python :variables python-backend 'anaconda python-formatter 'black python-format-on-save t)
+     ;; (python :variables python-backend 'anaconda)
      ;;ess
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
@@ -50,13 +56,11 @@ This function should only modify configuration layer settings."
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
      helm
-     ;;html
      auto-completion
      ;;lsp
      ;; better-defaults
      colors
      emacs-lisp
-     ;;ess
      ;;(geolocation :variables
      ;;             geolocation-enable-location-service t
      ;;             geolocation-enable-weather-forecast t)
@@ -293,7 +297,7 @@ It should only modify the values of Spacemacs settings."
 
    ;; Which-key delay in seconds. The which-key buffer is the popup listing
    ;; the commands bound to the current keystroke sequence. (default 0.4)
-   dotspacemacs-which-key-delay 0.0
+   dotspacemacs-which-key-delay 0.01
 
    ;; Which-key frame position. Possible values are `right', `bottom' and
    ;; `right-then-bottom'. right-then-bottom tries to display the frame to the
@@ -467,6 +471,11 @@ This function is called immediately after `dotspacemacs/init', before layer
 configuration.
 It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
+  ;; Use gnu ls when on macos (darwin)
+  (when (string= system-type "darwin")
+    (setq dired-use-ls-dired t
+          insert-directory-program "/usr/local/bin/gls"
+          dired-listing-switches "-aBhl --group-directories-first"))
   )
 
 (defun dotspacemacs/user-load ()
@@ -482,6 +491,20 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
+  ;; Use typescript mode on react typescript files
+  (add-to-list 'auto-mode-alist '("\\.tsx\\'" . typescript-mode))
+  (add-hook 'web-mode-hook 'prettier-js-mode)
+  (add-hook 'typescript-mode 'prettier-js-mode)
+  (add-hook 'javascript-mode 'prettier-js-mode)
+
+  ;; Attempt at a fix for the slowdown after having spacemacs open for too long
+  ;; see https://github.com/justbur/emacs-which-key/issues/226
+  (setq which-key-idle-delay 10000)
+  (setq which-key-idle-secondary-delay 0.05)
+  (setq which-key-show-early-on-C-h t)
+
+
+  (xterm-mouse-mode -1)
   ;;----------------------------------------------------------------------------
   ;; Org mode
   ;;----------------------------------------------------------------------------
@@ -491,9 +514,11 @@ before packages are loaded."
     ;; Change folding marker -- this messes up org bullets for some reason
     ;; (add-hook 'org-mode-hook (setq org-ellipsis "▾"))
     (setq org-ellipsis " ⤵")
-    (font-lock-add-keywords 'org-mode
-                            '(("^ *\\([-]\\) "
-                              (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
+    ;; Use a bullet point instead of a dash. Just for aesthetics.
+    ;; I think it might be slowing things down, and isn't *that* pretty.
+    ;; (font-lock-add-keywords 'org-mode
+    ;;                         '(("^ *\\([-]\\) "
+    ;;                           (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
     (setq org-agenda-files '("~/work-local/notes/done.org" "~/work-local/notes/"))
 
     (setq org-capture-templates
@@ -515,7 +540,7 @@ before packages are loaded."
                 (org-toggle-latex-fragment))
         (org-toggle-latex-fragment)))
 
-    (add-hook 'org-mode-hook 'hl-todo-mode)
+    ;; (add-hook 'org-mode-hook 'hl-todo-mode)
   )
 
   ;;----------------------------------------------------------------------------
@@ -603,33 +628,36 @@ before packages are loaded."
 ;; blue      #268bd2  4/4 blue      33 #0087ff 55 -10 -45  38 139 210 205  82  82
 ;; cyan      #2aa198  6/6 cyan      37 #00afaf 60 -35 -05  42 161 152 175  74  63
 ;; green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
-
-  ;; (setq hl-todo-keyword-faces
-  ;;       '(("HOLD" . "#b58900")
-  ;;         ("TODO" . "#dc322f")
-  ;;         ("NEXT" . "#dca3a3")
-  ;;         ("THEM" . "#dc8cc3")
-  ;;         ("PROG" . "#7cb8bb")
-  ;;         ("OKAY" . "#7cb8bb")
-  ;;         ("DONT" . "#5f7f5f")
-  ;;         ("FAIL" . "#8c5353")
-  ;;         ("DONE" . "#859900")
-  ;;         ("NOTE" . "#af005f")
-  ;;         ("OUTDATED" . "#d33682")
-  ;;         ("KLUDGE" . "#d0bf8f")
-  ;;         ("HACK" . "#d0bf8f")
-  ;;         ("TEMP" . "#d0bf8f")
-  ;;         ("FIXME" . "#cc9393")
-  ;;         ("XXX" . "#cc9393")
-  ;;         ("YELLOW"  . "#b58900")
-  ;;         ("ORANGE"  . "#cb4b16")
-  ;;         ("RED"     . "#dc322f")
-  ;;         ("MAGENTA" . "#d33682")
-  ;;         ("VIOLET"  . "#6c71c4")
-  ;;         ("BLUE"    . "#268bd2")
-  ;;         ("CYAN"    . "#2aa198")
-  ;;         ("GREEN"   . "#859900")
-  ;;         ("???" . "#cc9393")))
+  (defun solar-keyword-colors()
+    (interactive)
+  (setq hl-todo-keyword-faces
+        '(("HOLD" . "#b58900")
+          ("TODO" . "#dc322f")
+          ("NEXT" . "#dca3a3")
+          ("THEM" . "#dc8cc3")
+          ("PROG" . "#7cb8bb")
+          ("OKAY" . "#7cb8bb")
+          ("DONT" . "#5f7f5f")
+          ("FAIL" . "#8c5353")
+          ("DONE" . "#859900")
+          ("NOTE" . "#af005f")
+          ("OUTDATED" . "#d33682")
+          ("KLUDGE" . "#d0bf8f")
+          ("HACK" . "#d0bf8f")
+          ("TEMP" . "#d0bf8f")
+          ("FIXME" . "#cc9393")
+          ("XXX" . "#cc9393")
+          ("YELLOW"  . "#b58900")
+          ("ORANGE"  . "#cb4b16")
+          ("RED"     . "#dc322f")
+          ("MAGENTA" . "#d33682")
+          ("VIOLET"  . "#6c71c4")
+          ("BLUE"    . "#268bd2")
+          ("CYAN"    . "#2aa198")
+          ("GREEN"   . "#859900")
+          ("???" . "#cc9393")))
+  (hl-todo-mode)
+  )
 
   (defun bgtoggle()
     "Toggle light/dark background"
@@ -656,6 +684,7 @@ before packages are loaded."
   (spacemacs/set-leader-keys "bc" 'my/python-sql-mode)
   ;; Make SPC-b-g switch background dark/light
   (spacemacs/set-leader-keys "bg" 'bgtoggle)
+  (spacemacs/set-leader-keys "bk" 'solar-keyword-colors)
   (spacemacs/set-leader-keys "bf" 'find-file-in-project-at-point)
 
 ;; I don't really use the emacs server and probably won't with the spacemacs dev startup speed
@@ -679,18 +708,30 @@ This function is called at the very end of Spacemacs initialization."
    (quote
     ("fa2b58bb98b62c3b8cf3b6f02f058ef7827a8e497125de0254f56e373abee088" "bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" default)))
  '(evil-want-Y-yank-to-eol nil)
- '(org-agenda-files nil)
- '(org-capture-templates
+ '(hl-todo-keyword-faces
    (quote
-    (("t" "Todo item for KDR" entry
-      (file+olp "~/optum-notes/todo.org" "Next")
-      "** TODO %?"))) t)
+    (("TODO" . "#dc752f")
+     ("NEXT" . "#dc752f")
+     ("THEM" . "#2aa198")
+     ("PROG" . "#268bd2")
+     ("OKAY" . "#268bd2")
+     ("DONT" . "#d70000")
+     ("FAIL" . "#d70000")
+     ("DONE" . "#86dc2f")
+     ("NOTE" . "#875f00")
+     ("KLUDGE" . "#875f00")
+     ("HACK" . "#875f00")
+     ("TEMP" . "#875f00")
+     ("FIXME" . "#dc752f")
+     ("XXX+" . "#dc752f")
+     ("\\?\\?\\?+" . "#dc752f"))))
  '(package-selected-packages
    (quote
-    (plantuml-mode color-theme-modern web-beautify sql-indent livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc find-file-in-project ivy company-tern tern coffee-mode solarized-theme yapfify yaml-mode ws-butler winum which-key web-mode volatile-highlights vimrc-mode vimish-fold vi-tilde-fringe uuidgen use-package toc-org tagedit spaceline smeargle slim-mode scss-mode sass-mode restart-emacs rainbow-mode rainbow-identifiers rainbow-delimiters pyvenv pytest pyenv-mode py-isort pug-mode popwin pip-requirements persp-mode pcre2el paradox ox-gfm outshine orgit org-present org-pomodoro org-mime org-download org-bullets open-junk-file neotree move-text mmm-mode mic-paren markdown-toc magit-gitflow macrostep lorem-ipsum live-py-mode linum-relative link-hint less-css-mode indent-guide hy-mode hungry-delete htmlize hl-todo highlight-numbers highlight-indentation helm-themes helm-swoop helm-pydoc helm-projectile helm-mode-manager helm-make helm-gtags helm-gitignore helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag google-translate golden-ratio gnuplot gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe git-gutter-fringe+ gh-md ggtags fuzzy flyspell-correct-helm flycheck-ycmd flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu emmet-mode elisp-slime-nav dumb-jump diminish diff-hl define-word dactyl-mode cython-mode csv-mode company-ycmd company-web company-statistics company-anaconda column-enforce-mode color-theme-solarized color-theme-ocean color-identifiers-mode clean-aindent-mode auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell)))
+    (nginx-mode impatient-mode haml-mode counsel-css counsel swiper web-completion-data jinja2-mode company-ansible ansible-doc ansible tide typescript-mode import-js grizzl add-node-modules-path dockerfile-mode docker tablist docker-tramp plantuml-mode color-theme-modern web-beautify sql-indent livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc find-file-in-project company-tern tern coffee-mode solarized-theme yapfify yaml-mode ws-butler winum which-key web-mode volatile-highlights vimrc-mode vimish-fold vi-tilde-fringe uuidgen use-package toc-org tagedit spaceline smeargle slim-mode scss-mode sass-mode restart-emacs rainbow-mode rainbow-identifiers rainbow-delimiters pyvenv pytest pyenv-mode py-isort pug-mode popwin pip-requirements persp-mode pcre2el paradox ox-gfm outshine orgit org-present org-pomodoro org-mime org-download org-bullets open-junk-file neotree move-text mmm-mode mic-paren markdown-toc magit-gitflow macrostep lorem-ipsum live-py-mode linum-relative link-hint less-css-mode indent-guide hy-mode hungry-delete htmlize hl-todo highlight-numbers highlight-indentation helm-themes helm-swoop helm-pydoc helm-projectile helm-mode-manager helm-make helm-gtags helm-gitignore helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag google-translate golden-ratio gnuplot gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe git-gutter-fringe+ gh-md ggtags fuzzy flyspell-correct-helm flycheck-ycmd flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu emmet-mode elisp-slime-nav dumb-jump diminish diff-hl define-word dactyl-mode cython-mode csv-mode company-ycmd company-web company-statistics company-anaconda column-enforce-mode color-theme-solarized color-theme-ocean color-identifiers-mode clean-aindent-mode auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell)))
  '(paradox-github-token t)
  '(pdf-view-midnight-colors (quote ("#b2b2b2" . "#262626")))
- '(vc-follow-symlinks t))
+ '(vc-follow-symlinks t)
+ '(which-key-idle-delay 10000))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
