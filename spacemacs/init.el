@@ -68,6 +68,8 @@
                   ;; documentation, but since they also qualify as constants they are
                   ;; fontified like that in order to keep font-lock consistent between
                   ;; Python versions.
+                  ;; KDR: I don't care about that consistency, but I want them a different color...maybe I just need to change the "constants" color?
+                  ;; "False" "None" "True"
                   "nonlocal"
                   ;; Python 3.5+ PEP492
                   (and "async" (+ space) (or "def" "for" "with"))

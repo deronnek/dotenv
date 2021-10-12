@@ -41,6 +41,8 @@ This function should only modify configuration layer settings."
      react
      prettier
      sql
+     ;;company
+     ;;lsp
      markdown
      yaml
      csv
