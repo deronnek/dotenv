@@ -33,6 +33,7 @@ This function should only modify configuration layer settings."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(nginx
+     chrome
      html
      ansible
      typescript
@@ -40,6 +41,8 @@ This function should only modify configuration layer settings."
      react
      prettier
      sql
+     ;;company
+     ;;lsp
      markdown
      yaml
      csv
@@ -85,7 +88,7 @@ This function should only modify configuration layer settings."
    ;; `dotspacemacs/user-config'. To use a local version of a package, use the
    ;; `:location' property: '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
-   dotspacemacs-additional-packages '(color-theme-modern color-theme-solarized mic-paren outshine vimish-fold find-file-in-project)
+   dotspacemacs-additional-packages '(color-theme-modern color-theme-solarized mic-paren outshine vimish-fold find-file-in-project atomic-chrome)
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '(color-theme-solarized)
    ;; A list of packages that will not be installed and loaded.
@@ -583,6 +586,8 @@ before packages are loaded."
   (setq which-key-idle-delay 10000)
   (setq which-key-idle-secondary-delay 0.05)
   (setq which-key-show-early-on-C-h t)
+  (setq org-odt-convert-process "unoconv")
+  (setq org-odt-preferred-output-format "docx")
 
 
   (xterm-mouse-mode -1)
@@ -713,7 +718,7 @@ before packages are loaded."
     (interactive)
   (setq hl-todo-keyword-faces
         '(("HOLD" . "#b58900")
-          ("TODO" . "#dc322f")
+          ("TODO" . "#cb4b16")
           ("NEXT" . "#dca3a3")
           ("THEM" . "#dc8cc3")
           ("PROG" . "#7cb8bb")
@@ -730,12 +735,13 @@ before packages are loaded."
           ("XXX" . "#cc9393")
           ("YELLOW"  . "#b58900")
           ("ORANGE"  . "#cb4b16")
-          ("RED"     . "#dc322f")
+          ("RED"     . "#d70000")
           ("MAGENTA" . "#d33682")
           ("VIOLET"  . "#6c71c4")
           ("BLUE"    . "#268bd2")
           ("CYAN"    . "#2aa198")
           ("GREEN"   . "#859900")
+          ("GREEN2"   . "#5f8700")
           ("???" . "#cc9393")))
   (font-lock-add-keywords 'python-mode (list
 
@@ -805,6 +811,7 @@ before packages are loaded."
 
 ;; I don't really use the emacs server and probably won't with the spacemacs dev startup speed
 ;; (server-start)
+  (atomic-chrome-start-server)
 )
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.

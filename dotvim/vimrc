@@ -25,6 +25,7 @@ Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'junegunn/fzf.vim'
 Plugin 'leafgarland/typescript-vim'
 Plugin 'osyo-manga/vim-over' " OverCommandLine allows previewing of search/replace
+Plugin 'davidhalter/jedi-vim'
 Plugin 'tmhedberg/SimpylFold' " proper folding for python files
 " Haven't decided if I like powerline or airline better.  powerline seems to
 " know about my git branch without install fugitive which is nice.
