@@ -50,7 +50,8 @@ This function should only modify configuration layer settings."
      (terraform :variables terraform-auto-format-on-save t)
      (plantuml :variables plantuml-jar-path "~/local/plantUml.jar")
      ;;vimscript
-     (python :variables python-backend 'anaconda python-formatter 'black python-format-on-save t)
+     ;; (python :variables python-backend 'anaconda python-formatter 'yapf python-format-on-save t)
+     (python :variables python-backend 'lsp python-lsp-server 'pyright)
      ;; (python :variables python-backend 'anaconda)
      ;;ess
      ;; ----------------------------------------------------------------
